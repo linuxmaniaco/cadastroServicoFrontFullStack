@@ -30,17 +30,18 @@ function DashboardCrypto() {
             <AccountBalance />
           </Grid>
           <Grid item lg={8} xs={12}>
-            <Wallets />
+            {/* <Wallets /> */}
           </Grid>
           <Grid item lg={4} xs={12}>
-            <AccountSecurity />
+            {/* <AccountSecurity /> */}
           </Grid>
           <Grid item xs={12}>
-            <WatchList />
+            {/* <WatchList /> */}
+            
           </Grid>
         </Grid>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

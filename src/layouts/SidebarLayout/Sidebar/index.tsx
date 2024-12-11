@@ -79,18 +79,18 @@ function Sidebar() {
             background: theme.colors.alpha.trueWhite[10]
           }}
         />
-        <Box p={2}>
-          <Button
-            href="https://bloomui.com"
+        <Box p={2.5}>
+          {/* <Button
+            href=""
             target="_blank"
             rel="noopener noreferrer"
             variant="contained"
             color="warning"
             size="small"
             fullWidth
-          >
-            Upgrade to PRO
-          </Button>
+          > */}
+            Projeto FullStack Infnet
+          {/* </Button> */}
         </Box>
       </SidebarWrapper>
       <Drawer

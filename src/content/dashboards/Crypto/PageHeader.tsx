@@ -3,8 +3,8 @@ import { useTheme } from '@mui/material/styles';
 
 function PageHeader() {
   const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg'
+    name: 'Eduardo Santos',
+    avatar: '/static/images/avatars/fotoEdu.jpg'
   };
   const theme = useTheme();
 
@@ -24,10 +24,10 @@ function PageHeader() {
       </Grid>
       <Grid item>
         <Typography variant="h3" component="h3" gutterBottom>
-          Welcome, {user.name}!
+          Bem Vindo, {user.name}!
         </Typography>
         <Typography variant="subtitle2">
-          Today is a good day to start trading crypto assets!
+          Vamos focar!
         </Typography>
       </Grid>
     </Grid>
