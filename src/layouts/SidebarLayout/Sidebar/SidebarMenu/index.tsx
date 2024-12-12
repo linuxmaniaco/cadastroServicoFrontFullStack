@@ -216,7 +216,7 @@ function SidebarMenu() {
                   to="/management/transactions"
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  Transactions List
+                  Usuários
                 </Button>
               </ListItem>
             </List>

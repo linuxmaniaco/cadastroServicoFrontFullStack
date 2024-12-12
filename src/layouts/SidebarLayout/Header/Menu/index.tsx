@@ -84,7 +84,7 @@ function HeaderMenu() {
           }
         }}
       >
-        <List disablePadding component={Box} display="flex">
+        {/* <List disablePadding component={Box} display="flex">
           <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
@@ -104,7 +104,7 @@ function HeaderMenu() {
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
-              primary="Forms"
+              primary="Formulário"
             />
           </ListItem>
           <ListItem
@@ -117,7 +117,7 @@ function HeaderMenu() {
               primaryTypographyProps={{ noWrap: true }}
               primary={
                 <Box display="flex" alignItems="center">
-                  Others
+                  Outros
                   <Box display="flex" alignItems="center" pl={0.3}>
                     <ExpandMoreTwoToneIcon fontSize="small" />
                   </Box>
@@ -125,7 +125,7 @@ function HeaderMenu() {
               }
             />
           </ListItem>
-        </List>
+        </List> */}
       </ListWrapper>
       <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
         <MenuItem sx={{ px: 3 }} component={NavLink} to="/overview">

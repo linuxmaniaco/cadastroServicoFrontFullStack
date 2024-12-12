@@ -17,6 +17,7 @@ import {
 
 import SidebarMenu from './SidebarMenu';
 import Logo from 'src/components/LogoSign';
+import Version from 'src/components/Version';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
@@ -89,7 +90,7 @@ function Sidebar() {
             size="small"
             fullWidth
           > */}
-            Projeto FullStack Infnet
+            <Version />
           {/* </Button> */}
         </Box>
       </SidebarWrapper>
