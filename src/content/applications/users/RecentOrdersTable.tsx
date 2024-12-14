@@ -40,26 +40,26 @@ interface Filters {
   status?: CryptoOrderStatus;
 }
 
-const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
-  const map = {
-    failed: {
-      text: 'Failed',
-      color: 'error'
-    },
-    completed: {
-      text: 'Completed',
-      color: 'success'
-    },
-    pending: {
-      text: 'Pending',
-      color: 'warning'
-    }
-  };
+// const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
+//   const map = {
+//     failed: {
+//       text: 'Falhou',
+//       color: 'error'
+//     },
+//     completed: {
+//       text: 'Completo',
+//       color: 'success'
+//     },
+//     pending: {
+//       text: 'Pendente',
+//       color: 'warning'
+//     }
+//   };
 
-  const { text, color }: any = map[cryptoOrderStatus];
+//   const { text, color }: any = map[cryptoOrderStatus];
 
-  return <Label color={color}>{text}</Label>;
-};
+//   return <Label color={color}>{text}</Label>;
+// };
 
 const applyFilters = (
   cryptoOrders: CryptoOrder[],
@@ -202,7 +202,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               </FormControl>
             </Box>
           }
-          title="Recent Orders"
+          title="Lista Usuários"
         />
       )}
       <Divider />
@@ -247,6 +247,8 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       value={isCryptoOrderSelected}
                     />
                   </TableCell>
+
+
                   <TableCell>
                     <Typography
                       variant="body1"
@@ -261,6 +263,8 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
                     </Typography>
                   </TableCell>
+
+
                   <TableCell>
                     <Typography
                       variant="body1"
@@ -272,6 +276,8 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       {cryptoOrder.orderID}
                     </Typography>
                   </TableCell>
+
+
                   <TableCell>
                     <Typography
                       variant="body1"
@@ -286,6 +292,8 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       {cryptoOrder.sourceDesc}
                     </Typography>
                   </TableCell>
+
+
                   <TableCell align="right">
                     <Typography
                       variant="body1"
@@ -303,9 +311,13 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       )}
                     </Typography>
                   </TableCell>
+
+
                   <TableCell align="right">
-                    {getStatusLabel(cryptoOrder.status)}
+                    {/* {getStatusLabel(cryptoOrder.status)} */}
                   </TableCell>
+
+
                   <TableCell align="right">
                     <Tooltip title="Edit Order" arrow>
                       <IconButton
@@ -334,6 +346,8 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       </IconButton>
                     </Tooltip>
                   </TableCell>
+
+                  
                 </TableRow>
               );
             })}

@@ -6,6 +6,8 @@ import SidebarLayout from 'src/layouts/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
+import UserForm from './content/applications/users/UserForm';
+import UsersList from './content/management/UsersList';
 
 const Loader = (Component) => (props) =>
   (
@@ -24,18 +26,10 @@ const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
 // Applications
 
-const Messenger = Loader(
-  lazy(() => import('src/content/applications/Messenger'))
+const Users = Loader(
+  lazy(() => import('src/content/applications/users'))
 );
-const Transactions = Loader(
-  lazy(() => import('src/content/applications/Transactions'))
-);
-const UserProfile = Loader(
-  lazy(() => import('src/content/applications/Users/profile'))
-);
-const UserSettings = Loader(
-  lazy(() => import('src/content/applications/Users/settings'))
-);
+
 
 // Components
 
@@ -131,10 +125,6 @@ const routes: RouteObject[] = [
       {
         path: 'crypto',
         element: <Crypto />
-      },
-      {
-        path: 'messenger',
-        element: <Messenger />
       }
     ]
   },
@@ -144,15 +134,19 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="transactions" replace />
+        element: <Navigate to="users" replace />
       },
       {
-        path: 'transactions',
-        element: <Transactions />
+        path: 'users',
+        element: <Users />
       },
       {
-        path: 'user-list',
-        // element: <UserList/>
+        path: 'userList',
+        element: <UsersList />
+      },
+      {
+        path: "newUser",
+        element: <UserForm />
       },
       {
         path: 'profile',
@@ -160,14 +154,6 @@ const routes: RouteObject[] = [
           {
             path: '',
             element: <Navigate to="details" replace />
-          },
-          {
-            path: 'details',
-            element: <UserProfile />
-          },
-          {
-            path: 'settings',
-            element: <UserSettings />
           }
         ]
       }

@@ -13,7 +13,7 @@ function DashboardCrypto() {
   return (
     <>
       <Helmet>
-        <title>Crypto Dashboard</title>
+        <title>Projeto FullStack</title>
       </Helmet>
       <PageTitleWrapper>
         <PageHeader />

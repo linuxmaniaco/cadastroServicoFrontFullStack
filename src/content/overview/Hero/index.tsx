@@ -100,53 +100,6 @@ function Hero() {
           >
             Entrar
           </Button>
-          {/* <Button
-            sx={{ ml: 2 }}
-            component="a"
-            target="_blank"
-            rel="noopener"
-            href="https://bloomui.com/product/tokyo-free-white-react-typescript-material-ui-admin-dashboard"
-            size="large"
-            variant="text"
-          > */}
-            {/* Key Features */}
-          {/* </Button> */}
-          {/* <Grid container spacing={3} mt={5}>
-            <Grid item md={6}>
-              <MuiAvatar>
-                <img
-                  src="/static/images/logo/material-ui.svg"
-                  alt="Material-UI"
-                />
-              </MuiAvatar>
-              <Typography variant="h4">
-                <Box sx={{ pb: 2 }}>
-                  <b>Powered by MUI (Material-UI)</b>
-                </Box>
-                <Typography component="span" variant="subtitle2">
-                  A simple and customizable component library to build faster,
-                  beautiful, and accessible React apps.
-                </Typography>
-              </Typography>
-            </Grid>
-            <Grid item md={6}>
-              <TsAvatar>
-                <img
-                  src="/static/images/logo/typescript.svg"
-                  alt="Typescript"
-                />
-              </TsAvatar>
-              <Typography variant="h4">
-                <Box sx={{ pb: 2 }}>
-                  <b>Built with Typescript</b>
-                </Box>
-                <Typography component="span" variant="subtitle2">
-                  Tokyo Free White features a modern technology stack and is
-                  built with React + Typescript.
-                </Typography>
-              </Typography>
-            </Grid>
-          </Grid> */}
         </Grid>
       </Grid>
     </Container>

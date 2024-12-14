@@ -1,5 +1,6 @@
 import { Typography, Avatar, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import UsersList from 'src/content/management/UsersList';
 
 function PageHeader() {
   const user = {
@@ -28,6 +29,7 @@ function PageHeader() {
         </Typography>
         <Typography variant="subtitle2">
           Vamos focar!
+          
         </Typography>
       </Grid>
     </Grid>

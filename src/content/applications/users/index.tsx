@@ -5,12 +5,14 @@ import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
 
 import RecentOrders from './RecentOrders';
+import UserForm from './UserForm';
+import RecentOrdersTable from './RecentOrdersTable';
 
 function ApplicationsTransactions() {
   return (
     <>
       <Helmet>
-        <title>Transactions - Applications</title>
+        <title>Pagina de Usuários</title>
       </Helmet>
       <PageTitleWrapper>
         <PageHeader />
