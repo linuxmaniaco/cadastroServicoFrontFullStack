@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import { NavLink as RouterLink } from 'react-router-dom';
 import { SidebarContext } from 'src/contexts/SidebarContext';
+import PersonIcon from '@mui/icons-material/Person';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
 import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
 import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
@@ -31,6 +33,7 @@ import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwo
 import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
 import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
+import { Person } from '@mui/icons-material';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -215,9 +218,26 @@ function SidebarMenu() {
                   onClick={closeSidebar}
                   to="/management/users"
                   // to="/management/userList"
-                  startIcon={<TableChartTwoToneIcon />}
+                  startIcon={<Person />}
                 >
-                  Usuário
+                  Usuários
+                </Button>
+              </ListItem>
+            </List>
+          </SubMenuWrapper>
+
+          <SubMenuWrapper>
+            <List component="div">
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/management/cars"
+                  // to="/management/userList"
+                  startIcon={<DirectionsCarIcon />}
+                >
+                  Carros
                 </Button>
               </ListItem>
             </List>

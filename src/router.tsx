@@ -8,6 +8,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import UserForm from './content/applications/users/UserForm';
 import UsersList from './content/management/UsersList';
+import CarForm from './content/applications/cars/CarForm';
 
 const Loader = (Component) => (props) =>
   (
@@ -24,10 +25,14 @@ const Overview = Loader(lazy(() => import('src/content/overview')));
 
 const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
-// Applications
+// Applications 
 
 const Users = Loader(
   lazy(() => import('src/content/applications/users'))
+);
+
+const Cars = Loader(
+  lazy(() => import('src/content/applications/cars'))
 );
 
 
@@ -147,6 +152,14 @@ const routes: RouteObject[] = [
       {
         path: "newUser",
         element: <UserForm />
+      },
+      {
+        path: "cars",
+        element: <Cars />
+      },
+      {
+        path: "newCar",
+        element: <CarForm />
       },
       {
         path: 'profile',

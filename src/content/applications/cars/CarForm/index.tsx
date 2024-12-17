@@ -3,22 +3,16 @@ import { Box, Card, CardHeader, Typography, Avatar, Grid, Container, Divider, Ca
 import { Helmet } from "react-helmet-async";
 import PageTitleWrapper from "src/components/PageTitleWrapper";
 // import PageHeader from "src/content/management/UserForm/PageHeaderr";
-import PageHeader from "src/content/applications/users/UserForm/PageHeader";
+import PageHeader from "src/content/applications/cars/CarForm/PageHeader";
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
 import { useTheme } from '@mui/material/styles';
-import RecentOrders from "../RecentOrders";
+// import RecentOrders from "../RecentOrders";
 import { useState } from "react";
-import { useNavigate } from "react-router";
-import UsuarioService from "src/services/UsuarioService";
-import toast, { Toaster } from "react-hot-toast";
+import { createRoutesFromChildren, useNavigate } from "react-router";
 
 
-const UserForm:React.FC = () =>{
-
-    const toastSucess = () => toast.success("Usuario cadastrado com sucesso");
-
-    const toastError = () => toast.error("Erro ao cadastrar o usuário");
+const CarForm:React.FC = () =>{
 
     const genero = [
         {value: "Masculino", label: "Masculino"},
@@ -26,12 +20,12 @@ const UserForm:React.FC = () =>{
     ]
 
     const [formData, setFormData] = useState({
-        nome:"",
-        // genero:"",
-        email:"",
-        cargo:"",
-        password:"",
-        avatar:"",
+        modelo:"",
+        ano:"",
+        cor:"",
+        cavalosDePotencia:"",
+        fabricante:"",
+        pais:"",
     })
 
     const handleChange = (e) => {
@@ -42,33 +36,16 @@ const UserForm:React.FC = () =>{
 
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        let usuarioService = new UsuarioService();
-        usuarioService.save(formData).then((response => {
-            console.log("Salvo com sucesso!")
-            toastSucess()
-        })).catch((error) => {
-            console.log(error)
-            toastError()
-        });
-        
-
-        console.log(formData)
-    }
     return (
         <>
-            
-
             <Helmet>
-                <title>Cadastro de usuário</title>
+                <title>Cadastro de Carros</title>
             </Helmet>
-            
 
             <PageTitleWrapper>
                 <PageHeader />
             </PageTitleWrapper>
-            
+
             <Container maxWidth="lg">
                 <Grid
                     container
@@ -79,13 +56,10 @@ const UserForm:React.FC = () =>{
                 >
                     <Grid item xs={12}>
                         <CardHeader title="Formulário de cadastro" />
-                        
                             <Divider />
                             <CardContent>
                                 <Box 
                                     component="form"
-                                    onSubmit={handleSubmit}
-
                                     sx={{
                                         '& .MuiTextField-root': { m: 1, width: '30ch' }
                                     }}
@@ -97,11 +71,11 @@ const UserForm:React.FC = () =>{
                                         <TextField 
                                             fullWidth
                                             required
-                                            id="nome"
-                                            name="nome"
-                                            value={formData.nome}
+                                            id="modelo"
+                                            name="modelo"
+                                            value={formData.modelo}
                                             onChange={handleChange}
-                                            label="Nome: "
+                                            label="Modelo: "
                                         />
                                          
                                         {/* <TextField
@@ -122,46 +96,54 @@ const UserForm:React.FC = () =>{
                                         </TextField> */}
 
                                         <TextField
-                                            id="email"
+                                            id="ano"
                                             required
-                                            name="email"
-                                            value={formData.email}
+                                            name="ano"
+                                            value={formData.ano}
                                             onChange={handleChange}
-                                            label="Email"
+                                            label="Ano"
                                         />
                                             
                                         
                                         <TextField
-                                            id="cargo"
+                                            id="cor"
                                             required
                                             
-                                            name="cargo"
-                                            value={formData.cargo}
+                                            name="cor"
+                                            value={formData.cor}
                                             onChange={handleChange}
-                                            label="Cargo"
+                                            label="Cor"
                                             
                                         />
 
                                         <TextField
-                                            id="avatar"
+                                            id="cavalosDePotencia"
                                             required
                                             
-                                            name="avatar"
-                                            value={formData.avatar}
+                                            name="cavalosDePotencia"
+                                            value={formData.cavalosDePotencia}
                                             onChange={handleChange}
-                                            label="Link do seu avatar"
+                                            label="Cavalos de potencia"
                                             
                                         />
                                         
 
                                         <TextField
-                                            id="password"
+                                            id="fabricante"
                                             required
-                                            type="password"
-                                            name="password"
-                                            value={formData.password}
+                                            name="fabricante"
+                                            value={formData.fabricante}
                                             onChange={handleChange}
-                                            label="Senha"
+                                            label="Fabricante"
+                                        />
+
+                                        <TextField  
+                                            id="pais"
+                                            required
+                                            name="pais"
+                                            value={formData.pais}
+                                            onChange={handleChange}
+                                            label="Pais"
                                         />
 
                                 
@@ -171,14 +153,12 @@ const UserForm:React.FC = () =>{
                                         
                                     </div>
 
-                                    <Grid sm item>
+                                    <Grid item>
 
                                         <Button
-                                            type="submit" 
-
                                             sx={{ mt: { xs: 2, md: 0 } }}
                                             variant="contained"
-                                            // onClick={() => navigate("/management/newUser")}
+                                            onClick={() => navigate("/management/newUser")}
                                         >
                                             Enviar
                                         </Button>
@@ -193,7 +173,7 @@ const UserForm:React.FC = () =>{
         </>
     );
 }
-export default UserForm;
+export default CarForm;
 
 
 

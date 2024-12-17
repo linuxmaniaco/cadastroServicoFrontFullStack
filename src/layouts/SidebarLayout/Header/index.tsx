@@ -18,6 +18,7 @@ import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 import HeaderButtons from './Buttons';
 import HeaderUserbox from './Userbox';
 import HeaderMenu from './Menu';
+import { Toaster } from 'react-hot-toast';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -62,7 +63,14 @@ function Header() {
               )}`
       }}
     >
+
+      <Toaster
+                position="top-center"
+                reverseOrder={true}
+                
+            />
       <Stack
+
         direction="row"
         divider={<Divider orientation="vertical" flexItem />}
         alignItems="center"
