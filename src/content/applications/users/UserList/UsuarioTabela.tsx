@@ -27,9 +27,11 @@ import {
 
 import Label from 'src/components/Label';
 import { CryptoOrder, CryptoOrderStatus } from 'src/models/crypto_order';
+
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
+import { Usuario } from 'src/models/usuarios';
 
 interface RecentOrdersTableProps {
   className?: string;
@@ -84,7 +86,15 @@ const applyPagination = (
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
-const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
+const usuarioPaginacao = (
+  usuarios: Usuario[],
+  page: number,
+  limit: number
+): Usuario[] => {
+  return usuarios.slice(page * limit, page * limit + limit);
+};
+
+const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -173,6 +183,11 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   const selectedAllCryptoOrders =
     selectedCryptoOrders.length === cryptoOrders.length;
   const theme = useTheme();
+
+  const [listaUsuarios, setListaUsuarios] = useState<Usuario[]>([])
+
+  
+
 
   return (
     <Card>
@@ -369,12 +384,12 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   );
 };
 
-RecentOrdersTable.propTypes = {
+UsuarioTabela.propTypes = {
   cryptoOrders: PropTypes.array.isRequired
 };
 
-RecentOrdersTable.defaultProps = {
+UsuarioTabela.defaultProps = {
   cryptoOrders: []
 };
 
-export default RecentOrdersTable;
+export default UsuarioTabela;

@@ -7,14 +7,50 @@ import PageHeader from "src/content/applications/users/UserForm/PageHeader";
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
 import { useTheme } from '@mui/material/styles';
-import RecentOrders from "../RecentOrders";
+import RecentOrders from "../UserList/RecentOrders";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import UsuarioService from "src/services/UsuarioService";
 import toast, { Toaster } from "react-hot-toast";
+import * as yup from 'yup';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { string } from "prop-types";
 
 
 const UserForm:React.FC = () =>{
+    interface interfaceUser {
+        nome: string
+        email: string,
+        cargo: string,
+        password: string,
+        avatar: string
+    }
+
+    const schema = yup.object().shape({
+        nome: yup.string().required("Este campo é obrigatório").min(3, "Este campo deve ter no mínimo 3 letras").max(50, "Este campo deve ter no mínimo 50 letras"),
+        email: yup.string().required("Este campo é obrigatório").email('Email inválido!'),
+        cargo: yup.string().required("Este campo é obrigatorio").min(1, "Este campo deve ter no mínimo 15 letras").max(50, "Este campo deve ter no mínimo 50 letras"),
+        password: yup.string().required("Este campo é obrigatorio"),
+        avatar: yup.string().required("Este campo é obrigatório")
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm({resolver:  yupResolver(schema)})
+
+    const onSubmit = (formData:interfaceUser) => {
+        let usuarioService = new UsuarioService();
+        console.log(formData)
+
+        usuarioService.save(formData).then((response => {
+            toastSucess()
+        })).catch((error) => {
+            toastError()
+        });
+    }
 
     const toastSucess = () => toast.success("Usuario cadastrado com sucesso");
 
@@ -42,20 +78,22 @@ const UserForm:React.FC = () =>{
 
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        let usuarioService = new UsuarioService();
-        usuarioService.save(formData).then((response => {
-            console.log("Salvo com sucesso!")
-            toastSucess()
-        })).catch((error) => {
-            console.log(error)
-            toastError()
-        });
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     let usuarioService = new UsuarioService();
+    //     usuarioService.save(formData).then((response => {
+    //         console.log("Salvo com sucesso!")
+    //         toastSucess()
+    //     })).catch((error) => {
+    //         console.log(error)
+    //         toastError()
+    //     });
         
 
-        console.log(formData)
-    }
+    //     console.log(formData)
+    // }
+
+
     return (
         <>
             
@@ -84,7 +122,7 @@ const UserForm:React.FC = () =>{
                             <CardContent>
                                 <Box 
                                     component="form"
-                                    onSubmit={handleSubmit}
+                                    onSubmit={handleSubmit(onSubmit)}
 
                                     sx={{
                                         '& .MuiTextField-root': { m: 1, width: '30ch' }
@@ -99,9 +137,12 @@ const UserForm:React.FC = () =>{
                                             required
                                             id="nome"
                                             name="nome"
-                                            value={formData.nome}
-                                            onChange={handleChange}
+                                            // value={formData.nome}
+                                            // onChange={handleChange}
                                             label="Nome: "
+                                            {...register("nome")}
+                                            error={!! errors.nome}
+                                            helperText={errors.nome?.message}
                                         />
                                          
                                         {/* <TextField
@@ -125,32 +166,31 @@ const UserForm:React.FC = () =>{
                                             id="email"
                                             required
                                             name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
                                             label="Email"
+                                            {...register("email")}
+                                            error={!! errors.email}
+                                            helperText={errors.email?.message}
                                         />
                                             
                                         
                                         <TextField
                                             id="cargo"
                                             required
-                                            
                                             name="cargo"
-                                            value={formData.cargo}
-                                            onChange={handleChange}
                                             label="Cargo"
-                                            
+                                            {...register("cargo")}
+                                            error={!! errors.cargo}
+                                            helperText={errors.cargo?.message}
                                         />
 
                                         <TextField
                                             id="avatar"
                                             required
-                                            
                                             name="avatar"
-                                            value={formData.avatar}
-                                            onChange={handleChange}
                                             label="Link do seu avatar"
-                                            
+                                            {...register("avatar")}
+                                            error={!! errors.avatar}
+                                            helperText={errors.avatar?.message}
                                         />
                                         
 
@@ -159,9 +199,10 @@ const UserForm:React.FC = () =>{
                                             required
                                             type="password"
                                             name="password"
-                                            value={formData.password}
-                                            onChange={handleChange}
                                             label="Senha"
+                                            {...register("password")}
+                                            error={!! errors.password}
+                                            helperText={errors.password?.message}
                                         />
 
                                 
@@ -180,7 +221,7 @@ const UserForm:React.FC = () =>{
                                             variant="contained"
                                             // onClick={() => navigate("/management/newUser")}
                                         >
-                                            Enviar
+                                            Cadastrar
                                         </Button>
                                     </Grid>
                                 </Box>
@@ -199,4 +240,8 @@ export default UserForm;
 
 
     
+
+// function yupResolver(schema: yup.ObjectSchema<{ name: string; }, yup.AnyObject, { name: undefined; }, "">): import("react-hook-form").Resolver<import("react-hook-form").FieldValues, any> {
+//     throw new Error("Function not implemented.");
+// }
   

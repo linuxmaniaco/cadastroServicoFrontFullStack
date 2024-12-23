@@ -8,7 +8,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import UserForm from './content/applications/users/UserForm';
 import UsersList from './content/management/UsersList';
-import CarForm from './content/applications/cars/CarForm';
+import CarForm from './content/applications/cars/CarForm/indexx';
 
 const Loader = (Component) => (props) =>
   (
@@ -28,11 +28,11 @@ const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 // Applications 
 
 const Users = Loader(
-  lazy(() => import('src/content/applications/users'))
+  lazy(() => import('src/content/applications/users/UserList'))
 );
 
 const Cars = Loader(
-  lazy(() => import('src/content/applications/cars'))
+  lazy(() => import('src/content/applications/cars/CarList'))
 );
 
 
@@ -133,6 +133,17 @@ const routes: RouteObject[] = [
       }
     ]
   },
+  // TERMINAR ESSE MIGRAÇÃO RETIRAR TUDO DE management E POR EM applications. 
+  // {
+  //   path: 'applications',
+  //   element: <SidebarLayout />,
+  //   children: [
+  //     {
+  //       path: '',
+  //       element: <Navigate to="users" replace />
+  //     }
+  //   ]
+  // },
   {
     path: 'management',
     element: <SidebarLayout />,

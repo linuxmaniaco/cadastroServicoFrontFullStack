@@ -1,6 +1,7 @@
 import { Card } from '@mui/material';
 import { CryptoOrder } from 'src/models/crypto_order';
-import RecentOrdersTable from './RecentOrdersTable';
+import { Usuario } from 'src/models/usuarios';
+import RecentOrdersTable from './CarroTabela';
 import { subDays } from 'date-fns';
 
 function RecentOrders() {

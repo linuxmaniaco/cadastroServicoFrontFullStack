@@ -5,14 +5,14 @@ import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
 
 import RecentOrders from './RecentOrders';
-import UserForm from './UserForm';
-import RecentOrdersTable from './RecentOrdersTable';
+// import UserForm from '';
+import RecentOrdersTable from './CarroTabela';
 
 function ApplicationsTransactions() {
   return (
     <>
       <Helmet>
-        <title>Pagina de Usuários</title>
+        <title>Pagina de Carros</title>
       </Helmet>
       <PageTitleWrapper>
         <PageHeader />

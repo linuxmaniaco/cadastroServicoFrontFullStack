@@ -3,6 +3,7 @@ import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
+import { useEffect } from 'react';
 
 const TypographyH1 = styled(Typography)(
   ({ theme }) => `
@@ -71,6 +72,11 @@ const TsAvatar = styled(Box)(
 );
 
 function Hero() {
+
+  useEffect(() => {
+    console.log(process.env.REACT_APP_API_URL)
+  }, []);
+
   return (
     <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
       <Grid

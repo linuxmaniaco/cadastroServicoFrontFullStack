@@ -1,7 +1,7 @@
 import { Card, Grid } from '@mui/material';
 import React from 'react';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
-import RecentOrdersTable from 'src/content/applications/users/RecentOrdersTable';
+import RecentOrdersTable from 'src/content/applications/users/UserList/UsuarioTabela';
 import { CryptoOrder } from 'src/models/crypto_order';
 
 function UsersList() {
