@@ -42,26 +42,27 @@ interface Filters {
   status?: CryptoOrderStatus;
 }
 
-// const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
-//   const map = {
-//     failed: {
-//       text: 'Falhou',
-//       color: 'error'
-//     },
-//     completed: {
-//       text: 'Completo',
-//       color: 'success'
-//     },
-//     pending: {
-//       text: 'Pendente',
-//       color: 'warning'
-//     }
-//   };
 
-//   const { text, color }: any = map[cryptoOrderStatus];
+const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
+  const map = {
+    failed: {
+      text: 'Falhou',
+      color: 'error'
+    },
+    completed: {
+      text: 'Completo',
+      color: 'success'
+    },
+    pending: {
+      text: 'Pendente',
+      color: 'warning'
+    }
+  };
 
-//   return <Label color={color}>{text}</Label>;
-// };
+  const { text, color }: any = map[cryptoOrderStatus];
+
+  return <Label color={color}>{text}</Label>;
+};
 
 const applyFilters = (
   cryptoOrders: CryptoOrder[],
@@ -124,11 +125,14 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     }
   ];
 
+  console.log(statusOptions);
+
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
     let value = null;
 
     if (e.target.value !== 'all') {
       value = e.target.value;
+      console.log('A saida do target é: ', e.target.value) //TESTANDO SAIDA DO e.target.value
     }
 
     setFilters((prevFilters) => ({
@@ -329,7 +333,7 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
 
                   <TableCell align="right">
-                    {/* {getStatusLabel(cryptoOrder.status)} */}
+                     {getStatusLabel(cryptoOrder.status)}
                   </TableCell>
 
 

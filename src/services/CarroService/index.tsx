@@ -8,7 +8,7 @@ class CarroService {
         return axios.post("http://localhost:8080" + this.serverPath, carro)
     }
 
-    getAllUsuario(){
+    getAllCarros(){
         return axios.get("http://localhost:8080" + this.serverPath)
         
     }

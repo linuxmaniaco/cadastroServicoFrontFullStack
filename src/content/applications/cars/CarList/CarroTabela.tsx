@@ -31,16 +31,24 @@ import { CryptoOrder, CryptoOrderStatus } from 'src/models/crypto_order';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
-import { Carro } from 'src/models/carros';
+import { Carro, TipoPais } from 'src/models/carros';
+import carroService from '../../../../services/CarroService';
+
 // import { Carro } from 'src/models/usuarios';
 
 interface RecentOrdersTableProps {
   className?: string;
-  cryptoOrders: CryptoOrder[];
+  carros: Carro[];
 }
 
 interface Filters {
-  status?: CryptoOrderStatus;
+  pais?: TipoPais;
+}
+
+interface CarroTableProps {
+  className?: string;
+  carros: Carro[];
+
 }
 
 // const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
@@ -65,13 +73,14 @@ interface Filters {
 // };
 
 const applyFilters = (
-  cryptoOrders: CryptoOrder[],
+  // cryptoOrders: CryptoOrder[],
+  carros: Carro[],
   filters: Filters
-): CryptoOrder[] => {
-  return cryptoOrders.filter((cryptoOrder) => {
+): Carro[] => {
+  return carros.filter((carros) => {
     let matches = true;
 
-    if (filters.status && cryptoOrder.status !== filters.status) {
+    if (filters.pais && carros.pais !== filters.pais) {
       matches = false;
     }
 
@@ -80,11 +89,12 @@ const applyFilters = (
 };
 
 const applyPagination = (
-  cryptoOrders: CryptoOrder[],
+  // cryptoOrders: CryptoOrder[],
+  carros: Carro[],
   page: number,
   limit: number
-): CryptoOrder[] => {
-  return cryptoOrders.slice(page * limit, page * limit + limit);
+): Carro[] => {
+  return carros.slice(page * limit, page * limit + limit);
 };
 
 const carroPaginacao = (
@@ -95,7 +105,8 @@ const carroPaginacao = (
   return carros.slice(page * limit, page * limit + limit);
 };
 
-const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
+// const CarroTabela: FC<RecentOrdersTableProps> = ({ carro }) => {
+const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -103,38 +114,62 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [filters, setFilters] = useState<Filters>({
-    status: null
+    pais: null
   });
 
   const statusOptions = [
     {
-      id: 'all',
-      name: 'All'
+      id: 'todos',
+      name: 'Todos'
     },
     {
-      id: 'completed',
-      name: 'Completed'
+      id: 'alemanha',
+      name: 'Alemanha'
     },
     {
-      id: 'pending',
-      name: 'Pending'
+      id: 'coreiadosul',
+      name: 'Coreia do Sul'
     },
     {
-      id: 'failed',
-      name: 'Failed'
+      id: 'eua',
+      name: 'EUA'
+    },
+    {
+      id: 'franca',
+      name: 'França'
+    },
+    {
+      id: 'itália',
+      name: 'Itália'
+    },
+    {
+      id: 'japao',
+      name: 'Japão'
+    },
+    {
+      id: 'reinounido',
+      name: 'Reino Unido'
+    },
+    {
+      id: 'suecia',
+      name: 'Suécia'
     }
   ];
 
+  console.log(statusOptions);
+
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
     let value = null;
-
-    if (e.target.value !== 'all') {
+    if (e.target.value !== 'todos') {
       value = e.target.value;
+      console.log('A saida do target é: ', e.target.value) //TESTANDO SAIDA DO e.target.value
     }
+
 
     setFilters((prevFilters) => ({
       ...prevFilters,
-      status: value
+      pais: value,
+
     }));
   };
 
@@ -143,7 +178,7 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   ): void => {
     setSelectedCryptoOrders(
       event.target.checked
-        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
+        ? carros.map((carro) => carro.id)
         : []
     );
   };
@@ -172,7 +207,7 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
+  const filteredCryptoOrders = applyFilters(carros, filters);
   const paginatedCryptoOrders = applyPagination(
     filteredCryptoOrders,
     page,
@@ -180,9 +215,9 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   );
   const selectedSomeCryptoOrders =
     selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
+    selectedCryptoOrders.length < carros.length;
   const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
+    selectedCryptoOrders.length === carros.length;
   const theme = useTheme();
 
   // const [listaUsuarios, setListaUsuarios] = useState<Usuario[]>([])
@@ -202,11 +237,11 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
           action={
             <Box width={150}>
               <FormControl fullWidth variant="outlined">
-                <InputLabel>Fabricantes</InputLabel>
+                <InputLabel>País</InputLabel>
                 <Select
-                  value={filters.status || 'all'}
+                  value={filters.pais || 'todos'}
                   onChange={handleStatusChange}
-                  label="Fabricantes"
+                  label="País"
                   autoWidth
                 >
                   {statusOptions.map((statusOption) => (
@@ -244,6 +279,7 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/*{paginatedCryptoOrders.map((cryptoOrder) => {*/}
             {paginatedCryptoOrders.map((cryptoOrder) => {
               const isCryptoOrderSelected = selectedCryptoOrders.includes(
                 cryptoOrder.id
@@ -274,10 +310,10 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderDetails}
+                      {cryptoOrder.modelo}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
-                      {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
+                      {/*{format(cryptoOrder.orderDate, 'MMMM dd yyyy')}*/}
                     </Typography>
                   </TableCell>
 
@@ -290,7 +326,7 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderID}
+                      {cryptoOrder.ano}
                     </Typography>
                   </TableCell>
 
@@ -303,10 +339,10 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.sourceName}
+                      {cryptoOrder.cor}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
-                      {cryptoOrder.sourceDesc}
+                      {/*{cryptoOrder.sourceDesc}*/}
                     </Typography>
                   </TableCell>
 
@@ -319,19 +355,24 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.amountCrypto}
-                      {cryptoOrder.cryptoCurrency}
+                      {cryptoOrder.cavalosDePotencia + ' Cavalos'}
+                      {/*{cryptoOrder.cryptoCurrency}*/}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
-                      {numeral(cryptoOrder.amount).format(
-                        `${cryptoOrder.currency}0,0.00`
-                      )}
+                      {/*{numeral(cryptoOrder.amount).format(*/}
+                      {/*  `${cryptoOrder.currency}0,0.00`*/}
+                      {/*)}*/}
                     </Typography>
                   </TableCell>
 
 
                   <TableCell align="right">
-                    {/* {getStatusLabel(cryptoOrder.status)} */}
+                     {cryptoOrder.fabricante}
+                  </TableCell>
+
+                  <TableCell align="right">
+                    {cryptoOrder.pais}
+                    <p>{}</p>
                   </TableCell>
 
 
@@ -380,6 +421,7 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
           page={page}
           rowsPerPage={limit}
           rowsPerPageOptions={[5, 10, 25, 30]}
+          labelRowsPerPage="Linhas por página:"
         />
       </Box>
     </Card>
@@ -387,11 +429,11 @@ const CarroTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 };
 
 CarroTabela.propTypes = {
-  cryptoOrders: PropTypes.array.isRequired
+  carros: PropTypes.array.isRequired
 };
 
 CarroTabela.defaultProps = {
-  cryptoOrders: []
+  carros: []
 };
 
 export default CarroTabela;
