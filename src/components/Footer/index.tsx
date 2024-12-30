@@ -18,7 +18,7 @@ function Footer() {
       >
         <Box>
           <Typography variant="subtitle1">
-            Sistema de cadastro de serviços e produtos
+            Sistema de cadastro de carros
           </Typography>
         </Box>
         <Typography
@@ -27,7 +27,7 @@ function Footer() {
           }}
           variant="subtitle1"
         >
-          Crafted by{' '}
+          Criado por {' '}
           <Link
             href=""
             target="_blank"

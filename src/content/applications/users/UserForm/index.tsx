@@ -46,8 +46,10 @@ const UserForm:React.FC = () =>{
         console.log(formData)
 
         usuarioService.save(formData).then((response => {
+            console.log(formData);
             toastSucess()
         })).catch((error) => {
+            console.log(formData);
             toastError()
         });
     }
@@ -205,11 +207,6 @@ const UserForm:React.FC = () =>{
                                             helperText={errors.password?.message}
                                         />
 
-                                
-
-                                        
-
-                                        
                                     </div>
 
                                     <Grid sm item>

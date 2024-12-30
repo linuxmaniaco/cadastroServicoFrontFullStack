@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from 'react';
+import { FC, ChangeEvent, useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import numeral from 'numeral';
 import PropTypes from 'prop-types';
@@ -22,18 +22,23 @@ import {
   MenuItem,
   Typography,
   useTheme,
-  CardHeader
+  CardHeader, Modal, Button
 } from '@mui/material';
 
 import Label from 'src/components/Label';
 import { CryptoOrder, CryptoOrderStatus } from 'src/models/crypto_order';
-
+const carroService = new CarroService();
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import { Carro, TipoPais } from 'src/models/carros';
-import carroService from '../../../../services/CarroService';
-
+// import carroService from '../../../../services/CarroService/index';
+import CarroService from "src/services/CarroService";
+import DeleteConfirmation from '../../../../components/DeleteConfirmation';
+import toast from 'react-hot-toast';
+import CarroModal from './CarroModal';
+import PlagiarismIcon from '@mui/icons-material/Plagiarism';
+import { useNavigate } from 'react-router';
 // import { Carro } from 'src/models/usuarios';
 
 interface RecentOrdersTableProps {
@@ -105,17 +110,73 @@ const carroPaginacao = (
   return carros.slice(page * limit, page * limit + limit);
 };
 
-// const CarroTabela: FC<RecentOrdersTableProps> = ({ carro }) => {
 const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
+
+  const navigate = useNavigate();
+
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
+
+  const toastSucess = () => toast.success("Carro deletado com sucesso");
+
+  const toastError = () => toast.error("Erro ao deletar o carro");
+
+  const [showProfile, setShowProfile] = useState(false);
+  const [updateCarros, setUpdateCarros] = useState<Carro[]>([]);
+  const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false)
+  const [selectedRow, setSelectedRow] = useState(null)
   const selectedBulkActions = selectedCryptoOrders.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [filters, setFilters] = useState<Filters>({
     pais: null
   });
+  const filteredCryptoOrders = applyFilters(updateCarros, filters);
+
+  useEffect(() => {
+    setUpdateCarros(carros); // Inicializa o estado com a prop 'carros'
+  }, [carros]);
+
+  const handleCloseProfile = () => {
+    setShowProfile(false)
+    console.log("Estou aqui");
+  }
+  const handleOpenProfile = (carro) => {
+    setSelectedRow(carro)
+    setShowProfile(true)
+  }
+
+  //
+  const handleDelete = (carro: Carro) => {
+    setSelectedRow(carro);
+    setOpenDelete(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const handleCloseDelete = () =>{
+    setOpenDelete(false)
+  }
+
+  const handleConfirmDelete = () => {
+
+    carroService.delete(selectedRow.id).then(()=>{
+
+      setUpdateCarros((prevCarros) =>
+        prevCarros.filter((carro) => carro.id !== selectedRow.id),
+      );
+      toastSucess()
+      setOpenDelete(false)
+    }).catch((error) =>{
+      setOpenDelete(false)
+      toastError()
+    });
+
+  }
 
   const statusOptions = [
     {
@@ -156,13 +217,12 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
     }
   ];
 
-  console.log(statusOptions);
+
 
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
     let value = null;
     if (e.target.value !== 'todos') {
       value = e.target.value;
-      console.log('A saida do target é: ', e.target.value) //TESTANDO SAIDA DO e.target.value
     }
 
 
@@ -203,16 +263,22 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
     setPage(newPage);
   };
 
+  const openEditCar = (carro)=>{
+    console.log(carro.id);
+    navigate(`/management/editCar/${carro.id}`)
+  }
+
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredCryptoOrders = applyFilters(carros, filters);
+
   const paginatedCryptoOrders = applyPagination(
     filteredCryptoOrders,
     page,
     limit
   );
+
   const selectedSomeCryptoOrders =
     selectedCryptoOrders.length > 0 &&
     selectedCryptoOrders.length < carros.length;
@@ -280,14 +346,14 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
           </TableHead>
           <TableBody>
             {/*{paginatedCryptoOrders.map((cryptoOrder) => {*/}
-            {paginatedCryptoOrders.map((cryptoOrder) => {
+            {paginatedCryptoOrders.map((carro) => {
               const isCryptoOrderSelected = selectedCryptoOrders.includes(
-                cryptoOrder.id
+                carro.id
               );
               return (
                 <TableRow
                   hover
-                  key={cryptoOrder.id}
+                  key={carro.id}
                   selected={isCryptoOrderSelected}
                 >
                   <TableCell padding="checkbox">
@@ -295,7 +361,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                       color="primary"
                       checked={isCryptoOrderSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneCryptoOrder(event, cryptoOrder.id)
+                        handleSelectOneCryptoOrder(event, carro.id)
                       }
                       value={isCryptoOrderSelected}
                     />
@@ -310,7 +376,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.modelo}
+                      {carro.modelo}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
                       {/*{format(cryptoOrder.orderDate, 'MMMM dd yyyy')}*/}
@@ -326,7 +392,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.ano}
+                      {carro.ano}
                     </Typography>
                   </TableCell>
 
@@ -339,7 +405,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.cor}
+                      {carro.cor}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
                       {/*{cryptoOrder.sourceDesc}*/}
@@ -355,7 +421,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.cavalosDePotencia + ' Cavalos'}
+                      {carro.cavalosDePotencia + ' Cavalos'}
                       {/*{cryptoOrder.cryptoCurrency}*/}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
@@ -367,18 +433,35 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
 
 
                   <TableCell align="right">
-                     {cryptoOrder.fabricante}
+                     {carro.fabricante}
                   </TableCell>
 
                   <TableCell align="right">
-                    {cryptoOrder.pais}
+                    {carro.pais}
                     <p>{}</p>
                   </TableCell>
 
 
                   <TableCell align="right">
-                    <Tooltip title="Edit Order" arrow>
+                    <Tooltip title="Exibir Carro" arrow>
                       <IconButton
+                        onClick={() => handleOpenProfile(carro)}
+                        sx={{
+                          '&:hover': {
+                            background: theme.colors.primary.lighter
+                          },
+                          color: theme.palette.primary.main
+                        }}
+                        color="inherit"
+                        size="small"
+                      >
+                        <PlagiarismIcon fontSize="small" />
+                      </IconButton>
+
+                    </Tooltip>
+                    <Tooltip title="Editar Carro" arrow>
+                      <IconButton
+                        onClick={() => openEditCar(carro)}
                         sx={{
                           '&:hover': {
                             background: theme.colors.primary.lighter
@@ -391,8 +474,9 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                         <EditTwoToneIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Delete Order" arrow>
+                    <Tooltip title="Deletar carro" arrow>
                       <IconButton
+                        onClick={()=> handleDelete(carro)}
                         sx={{
                           '&:hover': { background: theme.colors.error.lighter },
                           color: theme.palette.error.main
@@ -405,13 +489,14 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                     </Tooltip>
                   </TableCell>
 
-                  
+
                 </TableRow>
               );
             })}
           </TableBody>
         </Table>
       </TableContainer>
+
       <Box p={2}>
         <TablePagination
           component="div"
@@ -423,7 +508,22 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
           rowsPerPageOptions={[5, 10, 25, 30]}
           labelRowsPerPage="Linhas por página:"
         />
+        <Modal open={open} onClose={handleClose} >
+          <Box>
+            <Typography>
+              Teste
+            </Typography>
+            <Button variant="contained" onClick={handleClose}/>
+          </Box>
+        </Modal>
       </Box>
+      
+      <DeleteConfirmation
+        open={openDelete}
+        onClose={handleCloseDelete}
+        onConfirm={handleConfirmDelete}
+      />
+      {showProfile && <CarroModal carro={selectedRow} onClose={handleCloseProfile}></CarroModal>}
     </Card>
   );
 };

@@ -63,25 +63,25 @@ function Status404() {
           </Box>
           <Container maxWidth="sm">
             <Card sx={{ textAlign: 'center', mt: 3, p: 4 }}>
-              <FormControl variant="outlined" fullWidth>
-                <OutlinedInputWrapper
-                  type="text"
-                  placeholder="Search terms here..."
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <ButtonSearch variant="contained" size="small">
-                        Search
-                      </ButtonSearch>
-                    </InputAdornment>
-                  }
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <SearchTwoToneIcon />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-              <Divider sx={{ my: 4 }}>OR</Divider>
+              {/*<FormControl variant="outlined" fullWidth>*/}
+              {/*  <OutlinedInputWrapper*/}
+              {/*    type="text"*/}
+              {/*    placeholder="Digite aqui sua busca"*/}
+              {/*    endAdornment={*/}
+              {/*      <InputAdornment position="end">*/}
+              {/*        <ButtonSearch variant="contained" size="small">*/}
+              {/*          Busca*/}
+              {/*        </ButtonSearch>*/}
+              {/*      </InputAdornment>*/}
+              {/*    }*/}
+              {/*    startAdornment={*/}
+              {/*      <InputAdornment position="start">*/}
+              {/*        <SearchTwoToneIcon />*/}
+              {/*      </InputAdornment>*/}
+              {/*    }*/}
+              {/*  />*/}
+              {/*</FormControl>*/}
+              {/*<Divider sx={{ my: 4 }}>OR</Divider>*/}
               <Button href="/overview" variant="outlined">
                 Go to homepage
               </Button>

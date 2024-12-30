@@ -8,7 +8,8 @@ import BaseLayout from 'src/layouts/BaseLayout';
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import UserForm from './content/applications/users/UserForm';
 import UsersList from './content/management/UsersList';
-import CarForm from './content/applications/cars/CarForm/indexx';
+import CarForm from './content/applications/cars/CarForm/index';
+import CarEditForm from './content/applications/cars/CarEditForm';
 
 const Loader = (Component) => (props) =>
   (
@@ -171,6 +172,10 @@ const routes: RouteObject[] = [
       {
         path: "newCar",
         element: <CarForm />
+      },
+      {
+        path: "editCar/:id",
+        element: <CarEditForm />
       },
       {
         path: 'profile',

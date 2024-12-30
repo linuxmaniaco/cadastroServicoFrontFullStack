@@ -3,20 +3,19 @@ import { Box, Card, CardHeader, Typography, Avatar, Grid, Container, Divider, Ca
 import { Helmet } from "react-helmet-async";
 import PageTitleWrapper from "src/components/PageTitleWrapper";
 // import PageHeader from "src/content/management/UserForm/PageHeaderr";
-import PageHeader from "src/content/applications/users/UserForm/PageHeader";
+import PageHeader from "src/content/applications/cars/CarForm/PageHeader";
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
 import { useTheme } from '@mui/material/styles';
 // import RecentOrders from "../UserList/RecentOrders";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import UsuarioService from "src/services/UsuarioService";
 import toast, { Toaster } from "react-hot-toast";
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { string } from "prop-types";
-import CarroService from "src/services/CarroService";
+import CarroService from 'src/services/CarroService';
 
 
 const CarForm:React.FC = () =>{
@@ -46,32 +45,27 @@ const CarForm:React.FC = () =>{
     } = useForm({resolver:  yupResolver(schema)})
 
     const onSubmit = (formData:interfaceCars) => {
-        let usuarioService = new CarroService();
+        let carroService = new CarroService();
         console.log(formData)
 
-        usuarioService.save(formData).then((response => {
+        carroService.save(formData).then((response => {
             toastSucess()
         })).catch((error) => {
             toastError()
         });
     }
 
-    const toastSucess = () => toast.success("Usuario cadastrado com sucesso");
+    const toastSucess = () => toast.success("Carro cadastrado com sucesso");
 
-    const toastError = () => toast.error("Erro ao cadastrar o usuário");
-
-    const genero = [
-        {value: "Masculino", label: "Masculino"},
-        {value: "Feminino", label: "Feminino"}
-    ]
+    const toastError = () => toast.error("Erro ao cadastrar o carro");
 
     const [formData, setFormData] = useState({
-        nome:"",
-        // genero:"",
-        email:"",
-        cargo:"",
-        password:"",
-        avatar:"",
+        modelo:"",
+        ano:"",
+        cor:"",
+        cavalosDePotencia:"",
+        fabricante:"",
+        pais:""
     })
 
     const handleChange = (e) => {
