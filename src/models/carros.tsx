@@ -1,4 +1,4 @@
-export type TipoPais = 'alemanha' | 'coreiadosul' | 'eua' | 'franca' | 'itália' | 'japao' | 'reinounido' | 'suecia';
+export type TipoPais = 'alemanha' | 'coreiadosul' | 'eua' | 'franca' | 'italia' | 'japao' | 'reinounido' | 'suecia';
 
 export interface Carro {
     id: string

@@ -21,5 +21,15 @@ class CarroService {
     getById(id:number) {
         return axios.get<Carro>(`http://localhost:8080${this.serverPath}/${id}`)
     }
+
+    search(formData: {modelo: string, ano: string, cor: string}) {
+        return axios.get<Carro[]>("http://localhost:8080/api/carros/search", {
+            headers:{
+                modelo: formData.modelo,
+                ano: formData.ano,
+                cor: formData.cor
+            }
+        })
+    }
 }
 export default CarroService;

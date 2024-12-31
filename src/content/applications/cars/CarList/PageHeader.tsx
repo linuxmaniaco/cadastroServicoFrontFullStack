@@ -2,6 +2,8 @@ import { Typography, Button, Grid } from '@mui/material';
 
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { Navigate, useNavigate } from 'react-router';
+import SearchBar from '../../../../components/SearchBar';
+import React from 'react';
 
 function PageHeader() {
   const user = {

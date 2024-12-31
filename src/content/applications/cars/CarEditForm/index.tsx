@@ -254,7 +254,6 @@ const CarEditForm:React.FC = () =>{
 
                                             sx={{ mt: { xs: 2, md: 0 } }}
                                             variant="contained"
-                                            // onClick={() => navigate("/management/newUser")}
                                         >
                                             Atualizar
                                         </Button>

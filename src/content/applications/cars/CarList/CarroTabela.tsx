@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState, useEffect } from 'react';
+import React, { FC, ChangeEvent, useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import numeral from 'numeral';
 import PropTypes from 'prop-types';
@@ -39,6 +39,8 @@ import toast from 'react-hot-toast';
 import CarroModal from './CarroModal';
 import PlagiarismIcon from '@mui/icons-material/Plagiarism';
 import { useNavigate } from 'react-router';
+import SearchBar from '../../../../components/SearchBar';
+import logo from '../../../../components/Logo';
 // import { Carro } from 'src/models/usuarios';
 
 interface RecentOrdersTableProps {
@@ -224,14 +226,12 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
     if (e.target.value !== 'todos') {
       value = e.target.value;
     }
-
-
     setFilters((prevFilters) => ({
       ...prevFilters,
       pais: value,
-
     }));
   };
+
 
   const handleSelectAllCryptoOrders = (
     event: ChangeEvent<HTMLInputElement>
@@ -292,248 +292,253 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
 
 
   return (
-    <Card>
-      {selectedBulkActions && (
-        <Box flex={1} p={2}>
-          <BulkActions />
-        </Box>
-      )}
-      {!selectedBulkActions && (
-        <CardHeader
-          action={
-            <Box width={150}>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel>País</InputLabel>
-                <Select
-                  value={filters.pais || 'todos'}
-                  onChange={handleStatusChange}
-                  label="País"
-                  autoWidth
-                >
-                  {statusOptions.map((statusOption) => (
-                    <MenuItem key={statusOption.id} value={statusOption.id}>
-                      {statusOption.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+
+        <Card>
+          {selectedBulkActions && (
+            <Box flex={1} p={2}>
+              <BulkActions />
             </Box>
-          }
-          title="Lista de carros"
-        />
-      )}
-      <Divider />
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  color="primary"
-                  checked={selectedAllCryptoOrders}
-                  indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllCryptoOrders}
-                />
-              </TableCell>
-              <TableCell>Modelo</TableCell>
-              <TableCell>Ano</TableCell>
-              <TableCell>Cor</TableCell>
-              <TableCell align="right">Potência</TableCell>
-              <TableCell align="right">Fabricante</TableCell>
-              <TableCell align="right">País</TableCell>
-              <TableCell align="right">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/*{paginatedCryptoOrders.map((cryptoOrder) => {*/}
-            {paginatedCryptoOrders.map((carro) => {
-              const isCryptoOrderSelected = selectedCryptoOrders.includes(
-                carro.id
-              );
-              return (
-                <TableRow
-                  hover
-                  key={carro.id}
-                  selected={isCryptoOrderSelected}
-                >
+          )}
+          {!selectedBulkActions && (
+            <CardHeader
+              action={
+                <Box width={150}>
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel>País</InputLabel>
+
+                    <Select
+                      value={filters.pais || 'todos'}
+                      onChange={handleStatusChange}
+                      label="País"
+                      autoWidth
+                    >
+                      {statusOptions.map((statusOption) => (
+                        <MenuItem key={statusOption.id} value={statusOption.id}>
+                          {statusOption.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+              }
+              title="Lista de carros"
+
+            />
+          )}
+
+          <Divider />
+          <SearchBar setCarros={setUpdateCarros}/>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isCryptoOrderSelected}
-                      onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneCryptoOrder(event, carro.id)
-                      }
-                      value={isCryptoOrderSelected}
+                      checked={selectedAllCryptoOrders}
+                      indeterminate={selectedSomeCryptoOrders}
+                      onChange={handleSelectAllCryptoOrders}
                     />
                   </TableCell>
-
-
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {carro.modelo}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {/*{format(cryptoOrder.orderDate, 'MMMM dd yyyy')}*/}
-                    </Typography>
-                  </TableCell>
-
-
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {carro.ano}
-                    </Typography>
-                  </TableCell>
-
-
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {carro.cor}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {/*{cryptoOrder.sourceDesc}*/}
-                    </Typography>
-                  </TableCell>
-
-
-                  <TableCell align="right">
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {carro.cavalosDePotencia + ' Cavalos'}
-                      {/*{cryptoOrder.cryptoCurrency}*/}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {/*{numeral(cryptoOrder.amount).format(*/}
-                      {/*  `${cryptoOrder.currency}0,0.00`*/}
-                      {/*)}*/}
-                    </Typography>
-                  </TableCell>
-
-
-                  <TableCell align="right">
-                     {carro.fabricante}
-                  </TableCell>
-
-                  <TableCell align="right">
-                    {carro.pais}
-                    <p>{}</p>
-                  </TableCell>
-
-
-                  <TableCell align="right">
-                    <Tooltip title="Exibir Carro" arrow>
-                      <IconButton
-                        onClick={() => handleOpenProfile(carro)}
-                        sx={{
-                          '&:hover': {
-                            background: theme.colors.primary.lighter
-                          },
-                          color: theme.palette.primary.main
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <PlagiarismIcon fontSize="small" />
-                      </IconButton>
-
-                    </Tooltip>
-                    <Tooltip title="Editar Carro" arrow>
-                      <IconButton
-                        onClick={() => openEditCar(carro)}
-                        sx={{
-                          '&:hover': {
-                            background: theme.colors.primary.lighter
-                          },
-                          color: theme.palette.primary.main
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <EditTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Deletar carro" arrow>
-                      <IconButton
-                        onClick={()=> handleDelete(carro)}
-                        sx={{
-                          '&:hover': { background: theme.colors.error.lighter },
-                          color: theme.palette.error.main
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <DeleteTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
-
-
+                  <TableCell>Modelo</TableCell>
+                  <TableCell>Ano</TableCell>
+                  <TableCell>Cor</TableCell>
+                  <TableCell align="right">Potência</TableCell>
+                  <TableCell align="right">Fabricante</TableCell>
+                  <TableCell align="right">País</TableCell>
+                  <TableCell align="right">Actions</TableCell>
                 </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+              </TableHead>
+              <TableBody>
+                {/*{paginatedCryptoOrders.map((cryptoOrder) => {*/}
+                {paginatedCryptoOrders.map((carro) => {
+                  const isCryptoOrderSelected = selectedCryptoOrders.includes(
+                    carro.id
+                  );
+                  return (
+                    <TableRow
+                      hover
+                      key={carro.id}
+                      selected={isCryptoOrderSelected}
+                    >
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          color="primary"
+                          checked={isCryptoOrderSelected}
+                          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                            handleSelectOneCryptoOrder(event, carro.id)
+                          }
+                          value={isCryptoOrderSelected}
+                        />
+                      </TableCell>
 
-      <Box p={2}>
-        <TablePagination
-          component="div"
-          count={filteredCryptoOrders.length}
-          onPageChange={handlePageChange}
-          onRowsPerPageChange={handleLimitChange}
-          page={page}
-          rowsPerPage={limit}
-          rowsPerPageOptions={[5, 10, 25, 30]}
-          labelRowsPerPage="Linhas por página:"
-        />
-        <Modal open={open} onClose={handleClose} >
-          <Box>
-            <Typography>
-              Teste
-            </Typography>
-            <Button variant="contained" onClick={handleClose}/>
+
+                      <TableCell>
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          color="text.primary"
+                          gutterBottom
+                          noWrap
+                        >
+                          {carro.modelo}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" noWrap>
+                          {/*{format(cryptoOrder.orderDate, 'MMMM dd yyyy')}*/}
+                        </Typography>
+                      </TableCell>
+
+
+                      <TableCell>
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          color="text.primary"
+                          gutterBottom
+                          noWrap
+                        >
+                          {carro.ano}
+                        </Typography>
+                      </TableCell>
+
+
+                      <TableCell>
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          color="text.primary"
+                          gutterBottom
+                          noWrap
+                        >
+                          {carro.cor}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" noWrap>
+                          {/*{cryptoOrder.sourceDesc}*/}
+                        </Typography>
+                      </TableCell>
+
+
+                      <TableCell align="right">
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          color="text.primary"
+                          gutterBottom
+                          noWrap
+                        >
+                          {carro.cavalosDePotencia + ' Cavalos'}
+                          {/*{cryptoOrder.cryptoCurrency}*/}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" noWrap>
+                          {/*{numeral(cryptoOrder.amount).format(*/}
+                          {/*  `${cryptoOrder.currency}0,0.00`*/}
+                          {/*)}*/}
+                        </Typography>
+                      </TableCell>
+
+
+                      <TableCell align="right">
+                         {carro.fabricante}
+                      </TableCell>
+
+                      <TableCell align="right">
+                        {carro.pais}
+                        <p>{}</p>
+                      </TableCell>
+
+
+                      <TableCell align="right">
+                        <Tooltip title="Exibir Carro" arrow>
+                          <IconButton
+                            onClick={() => handleOpenProfile(carro)}
+                            sx={{
+                              '&:hover': {
+                                background: theme.colors.primary.lighter
+                              },
+                              color: theme.palette.primary.main
+                            }}
+                            color="inherit"
+                            size="small"
+                          >
+                            <PlagiarismIcon fontSize="small" />
+                          </IconButton>
+
+                        </Tooltip>
+                        <Tooltip title="Editar Carro" arrow>
+                          <IconButton
+                            onClick={() => openEditCar(carro)}
+                            sx={{
+                              '&:hover': {
+                                background: theme.colors.primary.lighter
+                              },
+                              color: theme.palette.primary.main
+                            }}
+                            color="inherit"
+                            size="small"
+                          >
+                            <EditTwoToneIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Deletar carro" arrow>
+                          <IconButton
+                            onClick={()=> handleDelete(carro)}
+                            sx={{
+                              '&:hover': { background: theme.colors.error.lighter },
+                              color: theme.palette.error.main
+                            }}
+                            color="inherit"
+                            size="small"
+                          >
+                            <DeleteTwoToneIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+
+
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <Box p={2}>
+            <TablePagination
+              component="div"
+              count={filteredCryptoOrders.length}
+              onPageChange={handlePageChange}
+              onRowsPerPageChange={handleLimitChange}
+              page={page}
+              rowsPerPage={limit}
+              rowsPerPageOptions={[5, 10, 25, 30]}
+              labelRowsPerPage="Linhas por página:"
+            />
+            <Modal open={open} onClose={handleClose} >
+              <Box>
+                <Typography>
+                  Teste
+                </Typography>
+                <Button variant="contained" onClick={handleClose}/>
+              </Box>
+            </Modal>
           </Box>
-        </Modal>
-      </Box>
-      
-      <DeleteConfirmation
-        open={openDelete}
-        onClose={handleCloseDelete}
-        onConfirm={handleConfirmDelete}
-      />
-      {showProfile && <CarroModal carro={selectedRow} onClose={handleCloseProfile}></CarroModal>}
-    </Card>
-  );
-};
 
-CarroTabela.propTypes = {
-  carros: PropTypes.array.isRequired
-};
+          <DeleteConfirmation
+            open={openDelete}
+            onClose={handleCloseDelete}
+            onConfirm={handleConfirmDelete}
+          />
+          {showProfile && <CarroModal carro={selectedRow} onClose={handleCloseProfile}></CarroModal>}
+        </Card>
+      );
+    };
 
-CarroTabela.defaultProps = {
-  carros: []
-};
+    CarroTabela.propTypes = {
+      carros: PropTypes.array.isRequired
+    };
+
+    CarroTabela.defaultProps = {
+      carros: []
+    };
 
 export default CarroTabela;
