@@ -216,7 +216,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/users"
+                  to="/applications/users"
                   // to="/management/userList"
                   startIcon={<Person />}
                 >
@@ -233,7 +233,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/cars"
+                  to="/applications/cars"
                   // to="/management/userList"
                   startIcon={<DirectionsCarIcon />}
                 >

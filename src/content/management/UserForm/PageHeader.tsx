@@ -25,7 +25,7 @@ function PageHeader() {
         <Button
           sx={{ mt: { xs: 2, md: 0 } }}
           variant="contained"
-          onClick={() => navigate("/management")}
+          onClick={() => navigate("/applications")}
           startIcon={<AddTwoToneIcon fontSize="small" />}
         >
           Cadastrar Usuário

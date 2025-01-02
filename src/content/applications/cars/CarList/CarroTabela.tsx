@@ -265,7 +265,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
 
   const openEditCar = (carro)=>{
     console.log(carro.id);
-    navigate(`/management/editCar/${carro.id}`)
+    navigate(`/applications/editCar/${carro.id}`)
   }
 
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {

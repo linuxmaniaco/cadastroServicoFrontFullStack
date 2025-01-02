@@ -134,7 +134,7 @@ const routes: RouteObject[] = [
       }
     ]
   },
-  // TERMINAR ESSE MIGRAÇÃO RETIRAR TUDO DE management E POR EM applications. 
+  // TERMINAR ESSE MIGRAÇÃO RETIRAR TUDO DE management E POR EM applications.
   // {
   //   path: 'applications',
   //   element: <SidebarLayout />,
@@ -146,7 +146,7 @@ const routes: RouteObject[] = [
   //   ]
   // },
   {
-    path: 'management',
+    path: 'applications',
     element: <SidebarLayout />,
     children: [
       {

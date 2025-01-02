@@ -4,6 +4,7 @@ import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { Navigate, useNavigate } from 'react-router';
 import SearchBar from '../../../../components/SearchBar';
 import React from 'react';
+import CsvDownloader from '../../../../components/CsvDownloader';
 
 function PageHeader() {
   const user = {
@@ -28,11 +29,14 @@ function PageHeader() {
         <Button
           sx={{ mt: { xs: 2, md: 0 } }}
           variant="contained"
-          onClick={() => navigate("/management/newCar")}
+          onClick={() => navigate("/applications/newCar")}
           startIcon={<AddTwoToneIcon fontSize="small" />}
         >
           Cadastrar Carros
         </Button>
+      </Grid>
+      <Grid item>
+        <CsvDownloader />
       </Grid>
     </Grid>
   );
