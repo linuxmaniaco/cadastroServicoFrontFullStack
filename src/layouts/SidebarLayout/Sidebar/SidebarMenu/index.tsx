@@ -191,7 +191,8 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/overview"
+                  // to="/overview"
+                  to="/starter/welcome"
                   startIcon={<DesignServicesTwoToneIcon />}
                 >
                   INÍCIO

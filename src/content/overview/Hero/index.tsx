@@ -1,9 +1,106 @@
+// import { Box, Button, CircularProgress, Container, Paper, Typography } from '@mui/material';
+// import { Simulate } from 'react-dom/test-utils';
+// import error = Simulate.error;
+// import TextField from '@mui/material/TextField';
+// import { useState } from 'react';
+// import LoginService from '../../../services/LoginService';
+//
+//
+// const Login: React.FC = () => {
+//   const [username, setUsername] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState('');
+//   const handleLogin = () => {
+//     let loginService = new LoginService();
+//     loginService.logar(username,password).then((response) => {
+//       console.log(response.data)
+//     })
+//   }
+//
+//   return (
+//     <Container
+//                component="main"
+//                maxWidth="xs"
+//                sx={{
+//                  height: '100vh',
+//                  display: 'flex',
+//                  jsutifyContent: 'center',
+//                  alignItems: 'center',
+//                }}
+//     >
+//
+//       <Paper
+//         elevation={6}
+//         sx={{
+//           padding: 3,
+//           display: 'flex',
+//           flexDirection: 'colum',
+//           alingItems: 'center',
+//           width: '100%',
+//           maxWidth: 400,
+//         }}
+//       >
+//         <Typography component='h1' variant='h5'>
+//           Login
+//         </Typography>
+//         {error && (
+//           <Typography color="error" variant="body2" sx={{marginTop: 1 }}>
+//             {error}
+//           </Typography>
+//         )}
+//
+//         <Box component="form" sx={{width: '100%', marginTop: 2}} noValidate>
+//           <TextField
+//             label="Nome do Usuário"
+//             fullWidth
+//             variant="outlined"
+//             margin="normal"
+//             value={username}
+//             onChange={(e) => setUsername(e.target.value)}
+//           />
+//
+//           <TextField
+//             label="Senha"
+//             type="password"
+//             fullWidth
+//             variant="outlined"
+//             margin="normal"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//           />
+//           <Button
+//             fullWidth
+//             variant="contained"
+//             color="primary"
+//             onClick={handleLogin}
+//             disabled={loading}
+//             sx={{ marginTop: 2}}
+//           >
+//             {loading ? <CircularProgress size={24} color="inherit" /> : 'Entrar'}
+//           </Button>
+//
+//         </Box>
+//       </Paper>
+//
+//     </Container>
+//   )
+//
+// }
+//
+// export default Login;
+
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-
 import { Link as RouterLink } from 'react-router-dom';
-
 import { styled } from '@mui/material/styles';
 import { useEffect } from 'react';
+
+import {CircularProgress, Paper,} from '@mui/material';
+
+
+import TextField from '@mui/material/TextField';
+import { useState } from 'react';
+import LoginService from '../../../services/LoginService';
 
 const TypographyH1 = styled(Typography)(
   ({ theme }) => `
@@ -77,8 +174,31 @@ function Hero() {
     console.log(process.env.REACT_APP_API_URL)
   }, []);
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const handleLogin = () => {
+    let loginService = new LoginService();
+    loginService.logar(username,password).then((response) => {
+      console.log(response.data)
+      localStorage.setItem("token", response.data['token']);
+    }).catch(error => {
+      setError("Nome do usuário ou senha inválido!")
+    })
+  }
+
   return (
-    <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
+    <Container
+      maxWidth="lg"
+      sx={{
+        textAlign: 'center',
+        height: '100vh',
+        display: 'flex',
+        jsutifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Grid
         spacing={{ xs: 6, md: 10 }}
         justifyContent="center"
@@ -86,10 +206,18 @@ function Hero() {
         container
       >
         <Grid item md={10} lg={8} mx="auto">
-          {/* <LabelWrapper color="success">Version 2.0.0</LabelWrapper> */}
-          <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            Projeto FullStack 
+           {/*<LabelWrapper color="success">Version 2.0.0</LabelWrapper>*/}
+
+          {/*Titulo do projeto*/}
+          <TypographyH1
+            justifyContent="center"
+            alignItems="center"
+            sx={{padding: 0, mb: 4 }} variant="h1"
+          >
+            Projeto FullStack
           </TypographyH1>
+
+          {/*Subtitulo do projeto*/}
           <TypographyH2
             sx={{ lineHeight: 1.5, pb: 4 }}
             variant="h4"
@@ -98,15 +226,76 @@ function Hero() {
           >
             Pós Graduação
           </TypographyH2>
-          <Button
-            component={RouterLink}
-            to="/dashboards/crypto"
-            size="large"
-            variant="contained"
-          >
-            Entrar
-          </Button>
+
+
+          {/*<Button*/}
+          {/*  component={RouterLink}*/}
+          {/*  // to="/dashboards/crypto"*/}
+          {/*  to="/starter/welcome"*/}
+          {/*  size="large"*/}
+          {/*  variant="contained"*/}
+          {/*>*/}
+          {/*  Entrar*/}
+          {/*</Button>*/}
+
         </Grid>
+
+        <Paper
+          elevation={6}
+          sx={{
+            padding: 3,
+            display: 'flex',
+            flexDirection: 'colum',
+            alingItems: 'center',
+            width: '100%',
+            maxWidth: 400,
+          }}
+        >
+
+          <Typography component='h1' variant='h5'>
+            Login
+          </Typography>
+          {error && (
+            <Typography color="error" variant="body2" sx={{marginTop: 1 }}>
+              {error}
+            </Typography>
+          )}
+
+          <Box component="form" sx={{width: '100%', marginTop: 2}} noValidate>
+            <TextField
+              label="Nome do Usuário"
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+
+            <TextField
+              label="Senha"
+              type="password"
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={handleLogin}
+              disabled={loading}
+              sx={{ marginTop: 2}}
+            >
+              {loading ? <CircularProgress size={24} color="inherit" /> : 'Entrar'}
+            </Button>
+
+          </Box>
+
+
+        </Paper>
+
       </Grid>
     </Container>
   );

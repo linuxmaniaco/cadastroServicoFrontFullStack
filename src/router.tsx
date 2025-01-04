@@ -11,6 +11,9 @@ import UsersList from './content/management/UsersList';
 import CarForm from './content/applications/cars/CarForm/index';
 import CarEditForm from './content/applications/cars/CarEditForm';
 
+import PrivateRoute from './privateRoute';
+import Login from './content/login';
+
 const Loader = (Component) => (props) =>
   (
     <Suspense fallback={<SuspenseLoader />}>
@@ -35,6 +38,10 @@ const Users = Loader(
 const Cars = Loader(
   lazy(() => import('src/content/applications/cars/CarList'))
 );
+
+// const Login = Loader(
+//   lazy(() => import('src/content/login'))
+// );
 
 
 // Components
@@ -77,13 +84,21 @@ const StatusMaintenance = Loader(
 );
 
 const routes: RouteObject[] = [
+  // rota login
+  {
+    path:'login',
+    element:<Login />,
+
+  },
   {
     path: '',
-    element: <BaseLayout />,
+    // element: <BaseLayout />,
+    element: <PrivateRoute />,
     children: [
       {
         path: '/',
-        element: <Overview />
+        // element: <Overview />
+        element: <BaseLayout />
       },
       {
         path: 'overview',
@@ -121,15 +136,19 @@ const routes: RouteObject[] = [
     ]
   },
   {
-    path: 'dashboards',
-    element: <SidebarLayout />,
+    // path: 'dashboards',
+    path: 'starter',
+    // element: <SidebarLayout />,
+    element: <PrivateRoute />,
     children: [
       {
         path: '',
-        element: <Navigate to="crypto" replace />
+        // element: <Navigate to="crypto" replace />
+        element: <SidebarLayout />
       },
       {
-        path: 'crypto',
+        // path: 'crypto',
+        path: 'welcome',
         element: <Crypto />
       }
     ]
@@ -147,11 +166,13 @@ const routes: RouteObject[] = [
   // },
   {
     path: 'applications',
-    element: <SidebarLayout />,
+    // element: <SidebarLayout />,
+    element: <PrivateRoute />,
     children: [
       {
         path: '',
-        element: <Navigate to="users" replace />
+        // element: <Navigate to="users" replace />
+        element: <SidebarLayout />
       },
       {
         path: 'users',
@@ -190,11 +211,13 @@ const routes: RouteObject[] = [
   },
   {
     path: '/components',
-    element: <SidebarLayout />,
+    // element: <SidebarLayout />,
+    element: <PrivateRoute />,
     children: [
       {
         path: '',
-        element: <Navigate to="buttons" replace />
+        // element: <Navigate to="buttons" replace />
+        element: <SidebarLayout />
       },
       {
         path: 'buttons',
