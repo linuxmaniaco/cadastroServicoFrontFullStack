@@ -3,7 +3,7 @@ import { Carro } from '../../models/carros';
 
 class CarroService {
 
-    serverPath = "api/carros";
+    serverPath = "/api/carros";
 
     apiURL = process.env.REACT_APP_API_URL;
     
@@ -29,7 +29,7 @@ class CarroService {
     }
 
     search(formData: {modelo: string, ano: string, cor: string}) {
-        return axios.get<Carro[]>(`${this.apiURL}api/carros/search`, {
+        return axios.get<Carro[]>(`${this.apiURL}/api/carros/search`, {
             headers:{
                 modelo: formData.modelo,
                 ano: formData.ano,

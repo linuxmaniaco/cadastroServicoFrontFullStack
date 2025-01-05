@@ -7,7 +7,7 @@ const CsvDownloader = () => {
   const downloadCsv = async () => {
 
     try {
-      const response = await axios.get(`${apiURL}api/carros/export-cars`, {
+      const response = await axios.get(`${apiURL}/api/carros/export-cars`, {
         responseType: 'blob'
       });
       const url = window.URL.createObjectURL(new Blob([response.data]));

@@ -2,7 +2,7 @@ import axios from "axios";
 
 class UsuarioService {
 
-    serverPath = "api/usuarios";
+    serverPath = "/api/usuarios";
 
     apiURL = process.env.REACT_APP_API_URL;
     
