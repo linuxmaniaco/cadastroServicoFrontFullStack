@@ -160,7 +160,7 @@ const CarEditForm:React.FC = () =>{
 
                                             label="Modelo: "
                                             {...register("modelo")}
-                                            error={!! errors.modelo}
+                                            error={!!errors.modelo}
                                             helperText={errors.modelo?.message}
                                         />
                                          
