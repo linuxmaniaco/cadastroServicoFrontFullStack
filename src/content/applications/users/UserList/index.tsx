@@ -4,7 +4,7 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
 
-import RecentOrders from './RecentOrders';
+import ListaDeUsuarios from './ListaDeUsuarios';
 import UserForm from '../UserForm';
 import RecentOrdersTable from './UsuarioTabela';
 
@@ -26,7 +26,7 @@ function ApplicationsTransactions() {
           spacing={3}
         >
           <Grid item xs={12}>
-            <RecentOrders />
+            <ListaDeUsuarios />
           </Grid>
         </Grid>
       </Container>

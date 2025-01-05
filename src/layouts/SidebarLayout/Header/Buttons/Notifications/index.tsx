@@ -54,7 +54,7 @@ function HeaderNotifications() {
 
   return (
     <>
-      <Tooltip arrow title="Notifications">
+      <Tooltip arrow title="Notificações">
         <IconButton color="primary" ref={ref} onClick={handleOpen}>
           <NotificationsBadge
             badgeContent={1}

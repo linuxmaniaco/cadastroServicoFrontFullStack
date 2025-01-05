@@ -92,7 +92,7 @@ function HeaderSearch() {
 
   return (
     <>
-      <Tooltip arrow title="Search">
+      <Tooltip arrow title="Busca">
         <IconButton color="primary" onClick={handleClickOpen}>
           <SearchTwoToneIcon />
         </IconButton>
@@ -258,8 +258,7 @@ function HeaderSearch() {
                         lighten(theme.palette.secondary.main, 0.5)
                     }}
                   >
-                    Choose if you would like to show or not this typography
-                    section here...
+                    Escolha se deseja mostrar ou não
                   </Typography>
                 </Box>
                 <ChevronRightTwoToneIcon />
@@ -267,7 +266,7 @@ function HeaderSearch() {
             </List>
             <Divider sx={{ mt: 1, mb: 2 }} />
             <Box sx={{ textAlign: 'center' }}>
-              <Button color="primary">View all search results</Button>
+              <Button color="primary">Ver todos os resultados da pesquisa</Button>
             </Box>
           </DialogContent>
         )}

@@ -7,7 +7,7 @@ import PageHeader from "src/content/applications/users/UserForm/PageHeader";
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
 import { useTheme } from '@mui/material/styles';
-import RecentOrders from "../UserList/RecentOrders";
+import ListaDeUsuarios from "../UserList/ListaDeUsuarios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import UsuarioService from "src/services/UsuarioService";

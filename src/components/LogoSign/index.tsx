@@ -77,6 +77,13 @@ const LogoSignInner = styled(Box)(
 `
 );
 
+const LogoImage = styled('img')`
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+`;
+
 const TooltipWrapper = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -102,26 +109,9 @@ function Logo() {
       title="Projeto Full Stack"
       arrow
     >
-      <LogoWrapper to="/overview">
-        {/* <Badge
-          sx={{
-            '.MuiBadge-badge': {
-              fontSize: theme.typography.pxToRem(11),
-              right: -2,
-              top: 8
-            }
-          }}
-          overlap="circular"
-          color="success"
-          badgeContent="2.0"
-        >
-          <LogoSignWrapper>
-            <LogoSign>
-              <LogoSignInner />
-            </LogoSign>
-          </LogoSignWrapper>
-        </Badge> */}
-        LOGO
+      <LogoWrapper to="/starter/welcome">
+        <LogoImage src={"https://i.ibb.co/zsjr9KM/rb-66815.png"}></LogoImage>
+
       </LogoWrapper>
     </TooltipWrapper>
   );

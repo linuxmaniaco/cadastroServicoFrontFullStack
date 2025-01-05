@@ -134,7 +134,7 @@ function HeaderUserbox() {
         <List sx={{ p: 1 }} component="nav">
           <ListItem button to="/applications/profile/details" component={NavLink}>
             <AccountBoxTwoToneIcon fontSize="small" />
-            <ListItemText primary="My Profile" />
+            <ListItemText primary="Meu perfil" />
           </ListItem>
           {/*<ListItem button to="/dashboards/messenger" component={NavLink}>*/}
           {/*  <InboxTwoToneIcon fontSize="small" />*/}
@@ -146,14 +146,14 @@ function HeaderUserbox() {
             component={NavLink}
           >
             <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary="Account Settings" />
+            <ListItemText primary="Configuração de conta" />
           </ListItem>
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>
           <Button onClick={handleLogout} color="primary" fullWidth>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
-            Sign out
+            SAIR
           </Button>
         </Box>
       </Popover>

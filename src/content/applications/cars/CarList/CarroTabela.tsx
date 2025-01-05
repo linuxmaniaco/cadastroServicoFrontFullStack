@@ -116,7 +116,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
 
   const navigate = useNavigate();
 
-  const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
+  const [selectedListaCarros, setSelectedListaCarros] = useState<string[]>(
     []
   );
 
@@ -129,7 +129,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false)
   const [selectedRow, setSelectedRow] = useState(null)
-  const selectedBulkActions = selectedCryptoOrders.length > 0;
+  const selectedBulkActions = selectedListaCarros.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [filters, setFilters] = useState<Filters>({
@@ -236,7 +236,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
   const handleSelectAllCryptoOrders = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedCryptoOrders(
+    setSelectedListaCarros(
       event.target.checked
         ? carros.map((carro) => carro.id)
         : []
@@ -247,13 +247,13 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
     event: ChangeEvent<HTMLInputElement>,
     cryptoOrderId: string
   ): void => {
-    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
-      setSelectedCryptoOrders((prevSelected) => [
+    if (!selectedListaCarros.includes(cryptoOrderId)) {
+      setSelectedListaCarros((prevSelected) => [
         ...prevSelected,
         cryptoOrderId
       ]);
     } else {
-      setSelectedCryptoOrders((prevSelected) =>
+      setSelectedListaCarros((prevSelected) =>
         prevSelected.filter((id) => id !== cryptoOrderId)
       );
     }
@@ -273,17 +273,17 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
   };
 
 
-  const paginatedCryptoOrders = applyPagination(
+  const paginatedTabelaCarros = applyPagination(
     filteredCryptoOrders,
     page,
     limit
   );
 
   const selectedSomeCryptoOrders =
-    selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < carros.length;
+    selectedListaCarros.length > 0 &&
+    selectedListaCarros.length < carros.length;
   const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === carros.length;
+    selectedListaCarros.length === carros.length;
   const theme = useTheme();
 
   // const [listaUsuarios, setListaUsuarios] = useState<Usuario[]>([])
@@ -350,28 +350,17 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/*{paginatedCryptoOrders.map((cryptoOrder) => {*/}
-                {paginatedCryptoOrders.map((carro) => {
-                  const isCryptoOrderSelected = selectedCryptoOrders.includes(
+
+                {paginatedTabelaCarros.map((carro) => {
+                  const isTabelaCarrosSelected = selectedListaCarros.includes(
                     carro.id
                   );
                   return (
                     <TableRow
                       hover
                       key={carro.id}
-                      selected={isCryptoOrderSelected}
+                      selected={isTabelaCarrosSelected}
                     >
-                      {/*<TableCell padding="checkbox">*/}
-                      {/*  <Checkbox*/}
-                      {/*    color="primary"*/}
-                      {/*    checked={isCryptoOrderSelected}*/}
-                      {/*    onChange={(event: ChangeEvent<HTMLInputElement>) =>*/}
-                      {/*      handleSelectOneCryptoOrder(event, carro.id)*/}
-                      {/*    }*/}
-                      {/*    value={isCryptoOrderSelected}*/}
-                      {/*  />*/}
-                      {/*</TableCell>*/}
-
 
                       <TableCell>
                         <Typography

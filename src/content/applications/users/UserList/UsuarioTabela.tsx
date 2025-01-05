@@ -33,9 +33,9 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import { Usuario } from 'src/models/usuarios';
 
-interface RecentOrdersTableProps {
+interface UsuarioTabelaProps {
   className?: string;
-  cryptoOrders: CryptoOrder[];
+  usuarios: Usuario[];
 }
 
 interface Filters {
@@ -65,27 +65,27 @@ const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
 };
 
 const applyFilters = (
-  cryptoOrders: CryptoOrder[],
+  usuarios: Usuario[],
   filters: Filters
-): CryptoOrder[] => {
-  return cryptoOrders.filter((cryptoOrder) => {
+): Usuario[] => {
+  return usuarios.filter((usuarios) => {
     let matches = true;
 
-    if (filters.status && cryptoOrder.status !== filters.status) {
-      matches = false;
-    }
+    // if (filters.status && usuarios.status !== filters.status) {
+    //   matches = false;
+    // }
 
     return matches;
   });
 };
 
-const applyPagination = (
-  cryptoOrders: CryptoOrder[],
-  page: number,
-  limit: number
-): CryptoOrder[] => {
-  return cryptoOrders.slice(page * limit, page * limit + limit);
-};
+// const applyPagination = (
+//   usuarios: Usuario[],
+//   page: number,
+//   limit: number
+// ): Usuario[] => {
+//   return usuarios.slice(page * limit, page * limit + limit);
+// };
 
 const usuarioPaginacao = (
   usuarios: Usuario[],
@@ -95,7 +95,7 @@ const usuarioPaginacao = (
   return usuarios.slice(page * limit, page * limit + limit);
 };
 
-const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
+const UsuarioTabela: FC<UsuarioTabelaProps> = ({ usuarios }) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -106,26 +106,26 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     status: null
   });
 
-  const statusOptions = [
-    {
-      id: 'all',
-      name: 'All'
-    },
-    {
-      id: 'completed',
-      name: 'Completed'
-    },
-    {
-      id: 'pending',
-      name: 'Pending'
-    },
-    {
-      id: 'failed',
-      name: 'Failed'
-    }
-  ];
+  // const statusOptions = [
+  //   {
+  //     id: 'all',
+  //     name: 'All'
+  //   },
+  //   {
+  //     id: 'completed',
+  //     name: 'Completed'
+  //   },
+  //   {
+  //     id: 'pending',
+  //     name: 'Pending'
+  //   },
+  //   {
+  //     id: 'failed',
+  //     name: 'Failed'
+  //   }
+  // ];
 
-  console.log(statusOptions);
+  // console.log(statusOptions);
 
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
     let value = null;
@@ -146,7 +146,7 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   ): void => {
     setSelectedCryptoOrders(
       event.target.checked
-        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
+        ? usuarios.map((cryptoOrder) => cryptoOrder.id)
         : []
     );
   };
@@ -175,17 +175,17 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
-  const paginatedCryptoOrders = applyPagination(
+  const filteredCryptoOrders = applyFilters(usuarios, filters);
+  const paginatedListaUsuario = usuarioPaginacao(
     filteredCryptoOrders,
     page,
     limit
   );
   const selectedSomeCryptoOrders =
     selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
+    selectedCryptoOrders.length < usuarios.length;
   const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
+    selectedCryptoOrders.length === usuarios.length;
   const theme = useTheme();
 
   const [listaUsuarios, setListaUsuarios] = useState<Usuario[]>([])
@@ -195,78 +195,28 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
   return (
     <Card>
-      {/*{selectedBulkActions && (*/}
-      {/*  <Box flex={1} p={2}>*/}
-      {/*    <BulkActions />*/}
-      {/*  </Box>*/}
-      {/*)}*/}
-      {/*{!selectedBulkActions && (*/}
-      {/*  <CardHeader*/}
-      {/*    action={*/}
-      {/*      <Box width={150}>*/}
-      {/*        <FormControl fullWidth variant="outlined">*/}
-      {/*          <InputLabel>Status</InputLabel>*/}
-      {/*          <Select*/}
-      {/*            value={filters.status || 'all'}*/}
-      {/*            onChange={handleStatusChange}*/}
-      {/*            label="Status"*/}
-      {/*            autoWidth*/}
-      {/*          >*/}
-      {/*            {statusOptions.map((statusOption) => (*/}
-      {/*              <MenuItem key={statusOption.id} value={statusOption.id}>*/}
-      {/*                {statusOption.name}*/}
-      {/*              </MenuItem>*/}
-      {/*            ))}*/}
-      {/*          </Select>*/}
-      {/*        </FormControl>*/}
-      {/*      </Box>*/}
-      {/*    }*/}
-      {/*    title="Lista Usuários"*/}
-      {/*  />*/}
-      {/*)}*/}
       <Divider />
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              {/*<TableCell padding="checkbox">*/}
-              {/*  <Checkbox*/}
-              {/*    color="primary"*/}
-              {/*    checked={selectedAllCryptoOrders}*/}
-              {/*    indeterminate={selectedSomeCryptoOrders}*/}
-              {/*    onChange={handleSelectAllCryptoOrders}*/}
-              {/*  />*/}
-              {/*</TableCell>*/}
-              <TableCell>Order Details</TableCell>
-              <TableCell>Order ID</TableCell>
-              <TableCell>Source</TableCell>
-              <TableCell align="right">Amount</TableCell>
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Actions</TableCell>
+              <TableCell>Id</TableCell>
+              <TableCell>E-mail</TableCell>
+              <TableCell>Nome</TableCell>
+              <TableCell>Cargo</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedCryptoOrders.map((cryptoOrder) => {
+            {paginatedListaUsuario.map((usuarios) => {
               const isCryptoOrderSelected = selectedCryptoOrders.includes(
-                cryptoOrder.id
+                usuarios.id
               );
               return (
                 <TableRow
                   hover
-                  key={cryptoOrder.id}
+                  key={usuarios.id}
                   selected={isCryptoOrderSelected}
                 >
-                  {/*<TableCell padding="checkbox">*/}
-                  {/*  <Checkbox*/}
-                  {/*    color="primary"*/}
-                  {/*    checked={isCryptoOrderSelected}*/}
-                  {/*    onChange={(event: ChangeEvent<HTMLInputElement>) =>*/}
-                  {/*      handleSelectOneCryptoOrder(event, cryptoOrder.id)*/}
-                  {/*    }*/}
-                  {/*    value={isCryptoOrderSelected}*/}
-                  {/*  />*/}
-                  {/*</TableCell>*/}
-
 
                   <TableCell>
                     <Typography
@@ -276,10 +226,7 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderDetails}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
+                      {usuarios.id}
                     </Typography>
                   </TableCell>
 
@@ -292,7 +239,7 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderID}
+                      {usuarios.email}
                     </Typography>
                   </TableCell>
 
@@ -305,15 +252,11 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.sourceName}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {cryptoOrder.sourceDesc}
+                      {usuarios.nome}
                     </Typography>
                   </TableCell>
 
-
-                  <TableCell align="right">
+                  <TableCell>
                     <Typography
                       variant="body1"
                       fontWeight="bold"
@@ -321,52 +264,9 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.amountCrypto}
-                      {cryptoOrder.cryptoCurrency}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {numeral(cryptoOrder.amount).format(
-                        `${cryptoOrder.currency}0,0.00`
-                      )}
+                      {usuarios.cargo}
                     </Typography>
                   </TableCell>
-
-
-                  <TableCell align="right">
-                     {getStatusLabel(cryptoOrder.status)}
-                  </TableCell>
-
-
-                  <TableCell align="right">
-                    <Tooltip title="Edit Order" arrow>
-                      <IconButton
-                        sx={{
-                          '&:hover': {
-                            background: theme.colors.primary.lighter
-                          },
-                          color: theme.palette.primary.main
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <EditTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete Order" arrow>
-                      <IconButton
-                        sx={{
-                          '&:hover': { background: theme.colors.error.lighter },
-                          color: theme.palette.error.main
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <DeleteTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
-
-                  
                 </TableRow>
               );
             })}
@@ -389,11 +289,11 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 };
 
 UsuarioTabela.propTypes = {
-  cryptoOrders: PropTypes.array.isRequired
+  usuarios: PropTypes.array.isRequired
 };
 
 UsuarioTabela.defaultProps = {
-  cryptoOrders: []
+  usuarios: []
 };
 
 export default UsuarioTabela;
