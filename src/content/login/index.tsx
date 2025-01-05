@@ -30,6 +30,8 @@ const Login: React.FC = () => {
     console.log(process.env.REACT_APP_API_URL, "PROCESS ENV REACT");
   }, []);
 
+
+
   return (
     <Container component="main"
               maxWidth="xs"
@@ -51,16 +53,17 @@ const Login: React.FC = () => {
           maxWidth: 400,
         }}
       >
-        <Typography component='h1' variant='h5'>
-          Login
-        </Typography>
-        {error && (
-          <Typography color="error" variant="body2" sx={{marginTop: 1 }}>
+        <Box component="form" sx={{width: '100%', marginTop: 2}} noValidate>
+          <Typography component='h1' variant='h5' display={'flex'} justifyContent={'center'} >
+            LOGIN
+          </Typography>
+          {error && (
+          <Typography color="error" variant="body2" sx={{marginTop: 3 }} display={'flex'} justifyContent={'center'}>
             {error}
           </Typography>
-        )}
+          )}
 
-        <Box component="form" sx={{width: '100%', marginTop: 2}} noValidate>
+
           <TextField
             label="Nome do Usuário"
             fullWidth

@@ -93,8 +93,9 @@ function AccountBalance() {
       <TextCongractulation>
         <>
           <p>
-            Gostaria de agradecer ao Professor Leonardo Gloria, pela aula de Desenvolvimento Fullstack do
-            Instituto Infnet. Obrigado por compartilhar seus conhecimentos e por toda dedicação o esforço em oferecer uma aula de qualidade.
+            Agradecimentos ao Professor Leonardo Gloria, pela aula de Desenvolvimento Fullstack do
+            Instituto Infnet. Obrigado por compartilhar seus conhecimentos e por toda dedicação o esforço em oferecer uma aula de qualidade, com um ensino sempre claro e didático, tornou temas complexos mais acessíveis e instigantes.
+
           </p>
         </>
       </TextCongractulation>
