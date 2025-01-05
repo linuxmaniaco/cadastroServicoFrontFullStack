@@ -149,6 +149,7 @@ const carroService = new CarroService();
     carroService.getAllCarros().then((response) => {
       // console.log(response.data, 'DADOS DA BASE')
       setCarros(response.data);
+
     })
   }, []);
 

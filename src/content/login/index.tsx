@@ -1,7 +1,7 @@
 import { Box, Button, CircularProgress, Container, Paper, Typography } from '@mui/material';
 import { Simulate } from 'react-dom/test-utils';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoginService from '../../services/LoginService';
 import { useNavigate } from 'react-router';
 
@@ -25,6 +25,10 @@ const Login: React.FC = () => {
       setError("Nome do usuário ou senha inválido!")
     })
   }
+
+  useEffect(() => {
+    console.log(process.env.REACT_APP_API_URL, "PROCESS ENV REACT");
+  }, []);
 
   return (
     <Container component="main"

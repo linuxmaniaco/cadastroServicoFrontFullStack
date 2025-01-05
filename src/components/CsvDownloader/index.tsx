@@ -2,11 +2,12 @@ import { Button } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import axios from 'axios';
 
+const apiURL = process.env.REACT_APP_API_URL;
 const CsvDownloader = () => {
   const downloadCsv = async () => {
 
     try {
-      const response = await axios.get('http://localhost:8080/api/carros/export-cars', {
+      const response = await axios.get(`${apiURL}api/carros/export-cars`, {
         responseType: 'blob'
       });
       const url = window.URL.createObjectURL(new Blob([response.data]));

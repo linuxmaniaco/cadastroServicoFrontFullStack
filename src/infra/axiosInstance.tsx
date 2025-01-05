@@ -3,7 +3,8 @@ import { Simulate } from 'react-dom/test-utils';
 
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080",
+  // baseURL: "http://localhost:8080",
+  baseURL: 'http://trabalho-final-react-noite-9088f5955205.herokuapp.com',
   timeout: 10000,
 
 });
