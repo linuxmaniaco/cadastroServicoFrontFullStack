@@ -294,37 +294,37 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
   return (
 
         <Card>
-          {selectedBulkActions && (
-            <Box flex={1} p={2}>
-              <BulkActions />
-            </Box>
-          )}
-          {!selectedBulkActions && (
-            <CardHeader
-              action={
-                <Box width={150}>
-                  <FormControl fullWidth variant="outlined">
-                    <InputLabel>País</InputLabel>
+          {/*{selectedBulkActions && (*/}
+          {/*  <Box flex={1} p={2}>*/}
+          {/*    <BulkActions />*/}
+          {/*  </Box>*/}
+          {/*)}*/}
+          {/*{!selectedBulkActions && (*/}
+          {/*  <CardHeader*/}
+          {/*    action={*/}
+          {/*      <Box width={150}>*/}
+          {/*        <FormControl fullWidth variant="outlined">*/}
+          {/*          <InputLabel>País</InputLabel>*/}
 
-                    <Select
-                      value={filters.pais || 'todos'}
-                      onChange={handleStatusChange}
-                      label="País"
-                      autoWidth
-                    >
-                      {statusOptions.map((statusOption) => (
-                        <MenuItem key={statusOption.id} value={statusOption.id}>
-                          {statusOption.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Box>
-              }
-              title="Lista de carros"
+          {/*          <Select*/}
+          {/*            value={filters.pais || 'todos'}*/}
+          {/*            onChange={handleStatusChange}*/}
+          {/*            label="País"*/}
+          {/*            autoWidth*/}
+          {/*          >*/}
+          {/*            {statusOptions.map((statusOption) => (*/}
+          {/*              <MenuItem key={statusOption.id} value={statusOption.id}>*/}
+          {/*                {statusOption.name}*/}
+          {/*              </MenuItem>*/}
+          {/*            ))}*/}
+          {/*          </Select>*/}
+          {/*        </FormControl>*/}
+          {/*      </Box>*/}
+          {/*    }*/}
+          {/*    title="Lista de carros"*/}
 
-            />
-          )}
+          {/*  />*/}
+          {/*)}*/}
 
           <Divider />
           <SearchBar setCarros={setUpdateCarros}/>
@@ -332,14 +332,14 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      color="primary"
-                      checked={selectedAllCryptoOrders}
-                      indeterminate={selectedSomeCryptoOrders}
-                      onChange={handleSelectAllCryptoOrders}
-                    />
-                  </TableCell>
+                  {/*<TableCell padding="checkbox">*/}
+                    {/*<Checkbox*/}
+                    {/*  color="primary"*/}
+                    {/*  checked={selectedAllCryptoOrders}*/}
+                    {/*  indeterminate={selectedSomeCryptoOrders}*/}
+                    {/*  onChange={handleSelectAllCryptoOrders}*/}
+                    {/*/>*/}
+                  {/*</TableCell>*/}
                   <TableCell>Modelo</TableCell>
                   <TableCell>Ano</TableCell>
                   <TableCell>Cor</TableCell>
@@ -361,16 +361,16 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
                       key={carro.id}
                       selected={isCryptoOrderSelected}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isCryptoOrderSelected}
-                          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                            handleSelectOneCryptoOrder(event, carro.id)
-                          }
-                          value={isCryptoOrderSelected}
-                        />
-                      </TableCell>
+                      {/*<TableCell padding="checkbox">*/}
+                      {/*  <Checkbox*/}
+                      {/*    color="primary"*/}
+                      {/*    checked={isCryptoOrderSelected}*/}
+                      {/*    onChange={(event: ChangeEvent<HTMLInputElement>) =>*/}
+                      {/*      handleSelectOneCryptoOrder(event, carro.id)*/}
+                      {/*    }*/}
+                      {/*    value={isCryptoOrderSelected}*/}
+                      {/*  />*/}
+                      {/*</TableCell>*/}
 
 
                       <TableCell>

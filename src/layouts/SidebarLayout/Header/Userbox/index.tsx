@@ -74,7 +74,7 @@ function HeaderUserbox() {
   useEffect(() => {
     let loginService = new LoginService();
     loginService.getMyProfile().then(response => {
-      console.log(response.data)
+      // console.log(response.data)
       setUser(response.data)
     })
   }, []);

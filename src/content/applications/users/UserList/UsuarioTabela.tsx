@@ -195,48 +195,48 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
   return (
     <Card>
-      {selectedBulkActions && (
-        <Box flex={1} p={2}>
-          <BulkActions />
-        </Box>
-      )}
-      {!selectedBulkActions && (
-        <CardHeader
-          action={
-            <Box width={150}>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel>Status</InputLabel>
-                <Select
-                  value={filters.status || 'all'}
-                  onChange={handleStatusChange}
-                  label="Status"
-                  autoWidth
-                >
-                  {statusOptions.map((statusOption) => (
-                    <MenuItem key={statusOption.id} value={statusOption.id}>
-                      {statusOption.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-          }
-          title="Lista Usuários"
-        />
-      )}
+      {/*{selectedBulkActions && (*/}
+      {/*  <Box flex={1} p={2}>*/}
+      {/*    <BulkActions />*/}
+      {/*  </Box>*/}
+      {/*)}*/}
+      {/*{!selectedBulkActions && (*/}
+      {/*  <CardHeader*/}
+      {/*    action={*/}
+      {/*      <Box width={150}>*/}
+      {/*        <FormControl fullWidth variant="outlined">*/}
+      {/*          <InputLabel>Status</InputLabel>*/}
+      {/*          <Select*/}
+      {/*            value={filters.status || 'all'}*/}
+      {/*            onChange={handleStatusChange}*/}
+      {/*            label="Status"*/}
+      {/*            autoWidth*/}
+      {/*          >*/}
+      {/*            {statusOptions.map((statusOption) => (*/}
+      {/*              <MenuItem key={statusOption.id} value={statusOption.id}>*/}
+      {/*                {statusOption.name}*/}
+      {/*              </MenuItem>*/}
+      {/*            ))}*/}
+      {/*          </Select>*/}
+      {/*        </FormControl>*/}
+      {/*      </Box>*/}
+      {/*    }*/}
+      {/*    title="Lista Usuários"*/}
+      {/*  />*/}
+      {/*)}*/}
       <Divider />
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  color="primary"
-                  checked={selectedAllCryptoOrders}
-                  indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllCryptoOrders}
-                />
-              </TableCell>
+              {/*<TableCell padding="checkbox">*/}
+              {/*  <Checkbox*/}
+              {/*    color="primary"*/}
+              {/*    checked={selectedAllCryptoOrders}*/}
+              {/*    indeterminate={selectedSomeCryptoOrders}*/}
+              {/*    onChange={handleSelectAllCryptoOrders}*/}
+              {/*  />*/}
+              {/*</TableCell>*/}
               <TableCell>Order Details</TableCell>
               <TableCell>Order ID</TableCell>
               <TableCell>Source</TableCell>
@@ -256,16 +256,16 @@ const UsuarioTabela: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   key={cryptoOrder.id}
                   selected={isCryptoOrderSelected}
                 >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      color="primary"
-                      checked={isCryptoOrderSelected}
-                      onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneCryptoOrder(event, cryptoOrder.id)
-                      }
-                      value={isCryptoOrderSelected}
-                    />
-                  </TableCell>
+                  {/*<TableCell padding="checkbox">*/}
+                  {/*  <Checkbox*/}
+                  {/*    color="primary"*/}
+                  {/*    checked={isCryptoOrderSelected}*/}
+                  {/*    onChange={(event: ChangeEvent<HTMLInputElement>) =>*/}
+                  {/*      handleSelectOneCryptoOrder(event, cryptoOrder.id)*/}
+                  {/*    }*/}
+                  {/*    value={isCryptoOrderSelected}*/}
+                  {/*  />*/}
+                  {/*</TableCell>*/}
 
 
                   <TableCell>

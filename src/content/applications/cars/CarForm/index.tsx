@@ -53,6 +53,7 @@ const CarForm:React.FC = () =>{
         })).catch((error) => {
             toastError()
         });
+        navigate("/applications/cars")
     }
 
     const toastSucess = () => toast.success("Carro cadastrado com sucesso");

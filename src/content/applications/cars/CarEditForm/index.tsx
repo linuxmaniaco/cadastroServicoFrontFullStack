@@ -68,6 +68,7 @@ const CarEditForm:React.FC = () =>{
         })).catch((error) => {
             toastError()
         });
+        navigate("/applications/cars")
     }
 
     const toastSucess = () => toast.success("Usuario cadastrado com sucesso");
