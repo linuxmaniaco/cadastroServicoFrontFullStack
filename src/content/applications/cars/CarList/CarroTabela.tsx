@@ -143,11 +143,13 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
 
   const handleCloseProfile = () => {
     setShowProfile(false)
-    console.log("Estou aqui");
+    console.log("ShowProfile é ", showProfile);
   }
   const handleOpenProfile = (carro) => {
     setSelectedRow(carro)
     setShowProfile(true)
+    console.log(selectedRow, "selectedRow aqui")
+    console.log("showProfile é ", showProfile)
   }
 
   //
@@ -264,7 +266,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
   };
 
   const openEditCar = (carro)=>{
-    console.log(carro.id);
+    // console.log(carro.id);
     navigate(`/applications/editCar/${carro.id}`)
   }
 
@@ -353,7 +355,7 @@ const CarroTabela: FC<CarroTableProps> = ({ carros }) => {
 
                 {paginatedTabelaCarros.map((carro) => {
                   const isTabelaCarrosSelected = selectedListaCarros.includes(
-                    carro.id
+                    carro.id,
                   );
                   return (
                     <TableRow

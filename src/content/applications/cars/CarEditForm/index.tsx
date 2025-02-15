@@ -2,12 +2,9 @@ import { Password, Title } from "@mui/icons-material";
 import { Box, Card, CardHeader, Typography, Avatar, Grid, Container, Divider, CardContent, TextField, Select, MenuItem, Button } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import PageTitleWrapper from "src/components/PageTitleWrapper";
-// import PageHeader from "src/content/management/UserForm/PageHeaderr";
-import PageHeader from "src/content/applications/cars/CarEditForm/PageHeader";
-import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
-import { useTheme } from '@mui/material/styles';
-// import ListaDeUsuarios from "../UserList/ListaDeUsuarios";
+import PageHeader from "src/content/applications/cars/CarEditForm/PageHeader";
+
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import toast, { Toaster } from "react-hot-toast";
@@ -58,7 +55,6 @@ const CarEditForm:React.FC = () =>{
     }
 
 
-
     const onSubmit = (formData:interfaceCars) => {
 
         console.log(formData)
@@ -75,10 +71,6 @@ const CarEditForm:React.FC = () =>{
 
     const toastError = () => toast.error("Erro ao cadastrar o usuário");
 
-    // const genero = [
-    //     {value: "Masculino", label: "Masculino"},
-    //     {value: "Feminino", label: "Feminino"}
-    // ]
 
     const [formData, setFormData] = useState({
         modelo:"",
@@ -98,20 +90,6 @@ const CarEditForm:React.FC = () =>{
 
     const navigate = useNavigate();
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     let usuarioService = new UsuarioService();
-    //     usuarioService.save(formData).then((response => {
-    //         console.log("Salvo com sucesso!")
-    //         toastSucess()
-    //     })).catch((error) => {
-    //         console.log(error)
-    //         toastError()
-    //     });
-        
-
-    //     console.log(formData)
-    // }
 
 
     return (
@@ -163,23 +141,7 @@ const CarEditForm:React.FC = () =>{
                                             error={!!errors.modelo}
                                             helperText={errors.modelo?.message}
                                         />
-                                         
-                                        {/* <TextField
-                                            id="genero"
-                                            select
-                                            required
-                                            label="Genero"
-                                            value={formData.genero}
-                                            onChange={handleChange}
-                                            name="genero"
-                                        >
-                                            {genero.map((option) => (
-                                                <MenuItem key={option.value} value={option.value}>
-                                                    {option.label}
-                                                </MenuItem>    
-                                            ))}
-                                            
-                                        </TextField> */}
+
 
                                         <TextField
                                             id="ano"
@@ -241,10 +203,6 @@ const CarEditForm:React.FC = () =>{
                                             helperText={errors.pais?.message}
                                         />
 
-                                
-
-                                        
-
                                         
                                     </div>
 
@@ -271,12 +229,3 @@ const CarEditForm:React.FC = () =>{
 }
 export default CarEditForm;
 
-
-
-
-    
-
-// function yupResolver(schema: yup.ObjectSchema<{ name: string; }, yup.AnyObject, { name: undefined; }, "">): import("react-hook-form").Resolver<import("react-hook-form").FieldValues, any> {
-//     throw new Error("Function not implemented.");
-// }
-  

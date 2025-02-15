@@ -131,8 +131,8 @@ function HeaderUserbox() {
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
-        <List sx={{ p: 1 }} component="nav">
-          <ListItem button to="/applications/profile/details" component={NavLink}>
+        <List sx={{ p: 2 }} component="nav">
+          <ListItem button to="/applications/perfil" component={NavLink}>
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary="Meu perfil" />
           </ListItem>
@@ -140,14 +140,14 @@ function HeaderUserbox() {
           {/*  <InboxTwoToneIcon fontSize="small" />*/}
           {/*  <ListItemText primary="Messenger" />*/}
           {/*</ListItem>*/}
-          <ListItem
-            button
-            to="/applications/profile/settings"
-            component={NavLink}
-          >
-            <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary="Configuração de conta" />
-          </ListItem>
+          {/*<ListItem*/}
+          {/*  button*/}
+          {/*  to="/applications/profile/settings"*/}
+          {/*  component={NavLink}*/}
+          {/*>*/}
+          {/*  <AccountTreeTwoToneIcon fontSize="small" />*/}
+          {/*  <ListItemText primary="Configuração de conta" />*/}
+          {/*</ListItem>*/}
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>

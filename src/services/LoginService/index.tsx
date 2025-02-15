@@ -5,7 +5,9 @@ class LoginService {
 
   apiURL = process.env.REACT_APP_API_URL;
 
+
   logar(user:string, password: string){
+    console.log(this.apiURL, "LINK_API")
     return axios.post(`${this.apiURL}/api/usuarios/login`, {email:user, password: password})
 }
 

@@ -29,7 +29,7 @@ const CsvDownloader = () => {
                 onClick={downloadCsv}
                 startIcon={<AddTwoToneIcon fontSize="small" />}
         >
-          Export Carro para CSV
+          Exportar Carro para CSV
         </Button>
     </>
   )

@@ -13,6 +13,7 @@ import CarEditForm from './content/applications/cars/CarEditForm';
 
 import PrivateRoute from './privateRoute';
 import Login from './content/login';
+import Perfil from './content/applications/perfil';
 
 const Loader = (Component) => (props) =>
   (
@@ -197,6 +198,10 @@ const routes: RouteObject[] = [
       {
         path: "editCar/:id",
         element: <CarEditForm />
+      },
+      {
+        path: 'perfil',
+        element: <Perfil />
       },
       {
         path: 'profile',
