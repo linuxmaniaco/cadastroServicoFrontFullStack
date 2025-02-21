@@ -8,7 +8,7 @@ class LoginService {
 
   logar(user:string, password: string){
     console.log(this.apiURL, "LINK_API")
-    console.log(this.apiURL, `${this.apiURL}/api/usuarios/login`, "LINK_ACESSO - 21/02 18:17")
+    console.log(this.apiURL, `${this.apiURL}/api/usuarios/login`, "LINK_ACESSO - 21/02 18:34")
     return axios.post(`${this.apiURL}/api/usuarios/login`, {email:user, password: password})
 }
 
