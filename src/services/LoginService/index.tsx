@@ -13,6 +13,7 @@ class LoginService {
 }
 
   getMyProfile(){
+    console.log(`${this.apiURL}/api/usuarios/my-profile`)
     return  axiosInstance.get(`${this.apiURL}/api/usuarios/my-profile`)
 
   }
