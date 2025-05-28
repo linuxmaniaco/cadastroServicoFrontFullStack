@@ -6,7 +6,7 @@ import LoginService from '../../services/LoginService';
 import { useNavigate } from 'react-router';
 
 const Login: React.FC = () => {
-  {console.log("estou aqui login")}
+  // {console.log("estou aqui login")}
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -56,6 +56,11 @@ const Login: React.FC = () => {
         <Box component="form" sx={{width: '100%', marginTop: 2}} noValidate>
           <Typography component='h1' variant='h5' display={'flex'} justifyContent={'center'} >
             LOGIN
+          </Typography>
+          <br/>
+          <Typography>
+            Login: wile@acme.com <br/>
+            password: senha123
           </Typography>
           {error && (
           <Typography color="error" variant="body2" sx={{marginTop: 3 }} display={'flex'} justifyContent={'center'}>
