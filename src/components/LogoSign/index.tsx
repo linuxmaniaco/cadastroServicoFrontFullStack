@@ -27,6 +27,7 @@ const LogoSignWrapper = styled(Box)(
 `
 );
 
+
 const LogoSign = styled(Box)(
   ({ theme }) => `
         background: ${theme.general.reactFrameworkColor};
@@ -78,7 +79,7 @@ const LogoSignInner = styled(Box)(
 );
 
 const LogoImage = styled('img')`
-    width: 300px;
+    width: 250px;
     height: 150px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -110,7 +111,7 @@ function Logo() {
       arrow
     >
       <LogoWrapper to="/starter/welcome">
-        <LogoImage src={"https://i.ibb.co/zsjr9KM/rb-66815.png"}></LogoImage>
+        <LogoImage src={"https://img.freepik.com/fotos-premium/super-carro-esportivo-em-um-fundo-branco-ilustracao-3d_101266-10394.jpg"}></LogoImage>
 
       </LogoWrapper>
     </TooltipWrapper>
