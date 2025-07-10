@@ -122,9 +122,6 @@ function Status500() {
                     fontWeight="normal"
                     sx={{ mb: 4 }}
                   >
-                    High performance React template built with lots of powerful
-                    Material-UI components across multiple product niches for
-                    fast &amp; perfect apps development processes.
                   </TypographySecondary>
                   <Button href="/overview" size="large" variant="contained">
                     Overview
